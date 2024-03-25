@@ -121,7 +121,7 @@ db_port = st.secrets["DB_PORT"]
 
 #import datetime
 
-# Fetch data from the database
+# Retrieve data from the database
 
 def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -138,13 +138,7 @@ def get_data(selected_city):
 # Fetch data from the database
 data = get_data(selected_city)
 
-# Group by date and calculate the average temperature for each day
-#daily_average_temp = data.groupby('date')['temperature'].mean()
-
-# Plot the line chart
-#st.line_chart(daily_average_temp)
-
-
+# Calculate average temperature of each day in the date
 daily_average_temp = data.groupby('date')['temperature'].mean()
 
 # Plot the line chart using Matplotlib
@@ -157,8 +151,12 @@ plt.title(f'Average Temperature in {selected_city}')
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-# Display the plot in Streamlit
+# Display the line plot in Streamlit
 st.pyplot(plt)
 
+#create heatmap:
+#import seaborn as sns
+
+st.heatmap(daily_average_temp)
 
     
