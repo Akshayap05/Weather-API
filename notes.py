@@ -156,16 +156,7 @@ def main():
     # Display the line plot in Streamlit
     st.pyplot(plt)
 
-    # Create heatmap using Folium
-    st.write("Map with temperature data:")
-    m = folium.Map(location=[weather_data[1], weather_data[2]], zoom_start=10)
 
-    # Add temperature data as HeatMap
-    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
-    HeatMap(heat_data).add_to(m)
-
-    # Display the map
-    folium_static(m)
 
 if __name__ == "__main__":
     main()
