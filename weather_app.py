@@ -115,34 +115,18 @@ db_port = st.secrets["DB_PORT"]
 
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = "SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather"
+    query = "SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather GROUP BY day"
     data = pd.read_sql(query, engine)
     return data
 
-def temperature_by_day(data):
-    # Convert date column to datetime format
-    data['date'] = pd.to_datetime(data['date'])
+# Get aggregated weather data by day
+weather_data = get_data()
 
-    # Group data by day of the week and calculate average temperature
-    data['day_of_week'] = data['date'].dt.day_name()
-    average_temperature = data.groupby('day_of_week')['temperature'].mean()
+# Display the fetched data
+if not weather_data.empty:
+    st.write(weather_data)
+else:
+    st.error("Failed to get weather data.")
 
-    # Plot the average temperature for each day
-    plt.bar(average_temperature.index, average_temperature)
-    plt.xlabel('Day of the Week')
-    plt.ylabel('Average Temperature (°C)')
-    plt.title('Average Temperature by Day of the Week')
-    plt.xticks(rotation=45)
-    st.pyplot()
-
-# Main function
-def main():
-    st.title('Average Temperature by Day of the Week')
-    data = get_data()
-    if not data.empty:
-        temperature_by_day(data)
-    else:
-        st.error("No data available.")
-
-if __name__ == "__main__":
-    main()
+# Plot the trends
+st.line_chart(weather_data.set_index('day'))
