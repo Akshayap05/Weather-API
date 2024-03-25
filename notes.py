@@ -116,12 +116,12 @@ db_port = st.secrets["DB_PORT"]
 import datetime
 
 # Fetch data from the database
-def get_data(city):
+def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     end_date = datetime.datetime.now().date()  # Get today's date
     # Calculate the start date (Yesterday)
     start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
-    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE city='{city}' AND date::date BETWEEN '{start_date}' AND '{end_date}'"
+    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE city='{selected_city}' AND date::date BETWEEN '{start_date}' AND '{end_date}'"
     data = pd.read_sql(query, engine)
     return data
 
