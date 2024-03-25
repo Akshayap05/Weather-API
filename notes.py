@@ -116,11 +116,17 @@ db_port = st.secrets["DB_PORT"]
 import datetime
 
 # Fetch data from the database
+import datetime
+
+# Fetch data from the database
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     end_date = datetime.datetime.now().date()  # Get today's date
     # Find the most recent Friday
-    end_date -= datetime.timedelta(days=end_date.weekday() + 1) % 7
+    days_to_subtract = (end_date.weekday() + 1) % 7
+    if days_to_subtract == 0:
+        days_to_subtract = 7
+    end_date -= datetime.timedelta(days=days_to_subtract)
     # Calculate the start date (Friday) of the week before the most recent Friday
     start_date = end_date - datetime.timedelta(days=6)
     query = f"SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}' GROUP BY day"
@@ -138,3 +144,4 @@ else:
 
 # Plot the trends for the last seven days
 st.line_chart(weather_data.set_index('day'))
+
