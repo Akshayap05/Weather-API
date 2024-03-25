@@ -45,7 +45,7 @@ left_col,  right_col, right_hand_col = st.columns([10,6, 4])
 
 with left_col:
 
-    if tab1:
+    if tab1 == 'Weather':
 
         if weather_data:
             st.title(f"{selected_city}")
@@ -56,7 +56,7 @@ with left_col:
         else:
             st.error('Failed to get data')
 
-    elif tab2:
+    elif tab2 == 'Air Quality':
         if weather_data:
             st.write(f"UV Index: {UV_index}")
             st.write(f"CO: {CO}")
