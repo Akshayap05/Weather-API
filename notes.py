@@ -42,9 +42,7 @@ tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 # Position the informaiton and the image on page:
 
-left_col,  right_col, right_hand_col = st.columns([15,6, 4])
-
-
+left_col, right_col, right_hand_col = st.columns([15, 6, 4])
 
 if tab == "Weather":
     with left_col:
@@ -53,22 +51,22 @@ if tab == "Weather":
         st.write(f"Condition: {condition}")
         st.write(f"Humidity: {humidity}%")
         st.write(f"Cloud Cover: {Cloud_cover}%")
-   
 elif tab == "Air Quality":
     with left_col:
-        st.title(f"{selected_city} Weather")
-        st.write(f"Temperature: {temperature}°C")
-        st.write(f"Condition: {condition}")
-        st.write(f"Humidity: {humidity}%")
-        st.write(f"Cloud Cover: {Cloud_cover}%")
+        st.title(f"{selected_city} Air Quality")
+        st.write(f"UV Index: {UV_index}")
+        st.write(f"CO: {CO}")
+        st.write(f"NO2: {NO2}")
+        st.write(f"Ozone (O3): {Ozone}")
 else:
     st.error("Failed to get data.")
 
+# Display weather condition icon in the right column
 with right_col:
-
     if weather_data:
         icon_url = "https:" + icon
         st.image(icon_url, caption='Weather Condition', use_column_width=True)
+
 
 
 
