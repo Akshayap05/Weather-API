@@ -107,30 +107,21 @@ db_port = st.secrets["DB_PORT"]
 
 def db_connect(selected_city):
     try:
-        # Connect to the database
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-
-        # Fetch data for a specific city
         query = f"SELECT date, temperature FROM weather WHERE location = '{selected_city}'"
         data = pd.read_sql(query, engine)
-
         return data
     except Exception as e:
         st.error(f'Error: {e}')
 
-# Connect to the database and fetch data for the selected city
+# Fetch data from the database
 data = db_connect(selected_city)
 
-# Ensure that the weather_data DataFrame contains the necessary columns (date and temperature)
-# Plot temperature changes for the selected city
-
-# Convert 'date' column to datetime format with custom format specifier
-#data['date'] = pd.to_date(data['date'], format='%Y-%m-%d ')
-
-# Plot line plot with markers for temperature changes over time
+# Ensure that the data DataFrame contains the necessary columns (date and temperature)
 if data is not None:
     fig, ax = plt.subplots()
-    ax.plot(data['date'], data['temperature'], marker='o')
+    ax.scatter(data['date'], data['temperature'])
+    ax.plot(data['date'], data['temperature'], linestyle='-', color='blue')  # Connect scatter points
     ax.set_title(f'Temperature changes in {selected_city} over time')
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature')
