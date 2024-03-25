@@ -91,11 +91,11 @@ def get_data(selected_city):
     data = pd.read_sql(query, engine)
     return data
 
+# Fetch weather data from the database
+data = get_data(selected_city)
 
 # Fetch data from the database
 def main():
-    # Fetch weather data from the database
-    data = get_data(selected_city)
 
     # Calculate average temperature of each day in the date
     daily_average_temp = data.groupby('date')['temperature'].mean()
@@ -112,20 +112,20 @@ def main():
     # Display the line plot in Streamlit
     st.pyplot(plt)
 
-    # Plot bar chart for each pollutant
-    st.subheader(f'Air Quality in {selected_city}')
-    fig, ax = plt.subplots(figsize=(10, 6))
-    data.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('Pollutant')
-    plt.ylabel('Concentration')
-    plt.title('Air Quality Comparison')
-    plt.xticks(rotation=0)
-    plt.legend(loc='upper right')
-    plt.tight_layout()
 
-    # Display the plot
-    st.pyplot(fig)
+# Plot bar chart for each pollutant
+st.subheader(f'Air Quality in {selected_city}')
+fig, ax = plt.subplots(figsize=(10, 6))
+data.plot(kind='bar', x='location', ax=ax)
+plt.xlabel('Pollutant')
+plt.ylabel('Concentration')
+plt.title('Air Quality Comparison')
+plt.xticks(rotation=0)
+plt.legend(loc='upper right')
+plt.tight_layout()
 
+# Display the plot
+st.pyplot(fig)
     
 
 
