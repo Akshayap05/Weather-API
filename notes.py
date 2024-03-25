@@ -114,40 +114,31 @@ def main():
 main()
 
 # Retrieve latest data for all cities
-def get_latest_data_for_all_cities():
+def get_pollutant_data_for_all_cities():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = """
-            SELECT date, location, temperature, co, no2, o3 
-            FROM student.weather 
-            WHERE (date, location) IN (
-                SELECT date, location
-                FROM student.weather
-                GROUP BY date, location
-                HAVING date = MAX(date)
-            )
+            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+            FROM student.weather
+            GROUP BY location
             """
-    latest_data_all_cities = pd.read_sql(query, engine)
-    return latest_data_all_cities
+    pollutant_data_all_cities = pd.read_sql(query, engine)
+    return pollutant_data_all_cities
 
-# Fetch the latest data for all cities
-latest_data_all_cities = get_latest_data_for_all_cities()
+# Fetch the pollutant data for all cities
+pollutant_data_all_cities = get_pollutant_data_for_all_cities()
 
-# Plot air quality comparison for all cities
-def plot_air_quality_comparison_all_cities(data):
-    fig, ax = plt.subplots(figsize=(10, 6))
-    data.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('City')
-    plt.ylabel('Concentration')
-    plt.title('Air Quality Comparison for All Cities')
-    plt.xticks(rotation=45)
-    plt.legend(loc='upper right')
-    plt.tight_layout()
+# Plot the pollutants for all cities
+fig, ax = plt.subplots(figsize=(10, 6))
+pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
+plt.xlabel('City')
+plt.ylabel('Average Concentration')
+plt.title('Pollutant Comparison for All Cities')
+plt.xticks(rotation=45)
+plt.legend(loc='upper right')
+plt.tight_layout()
 
-    # Display the plot
-    st.pyplot(fig)
-
-# Plot air quality comparison for all cities using the latest data
-plot_air_quality_comparison_all_cities(latest_data_all_cities)
+# Display the plot
+st.pyplot(fig)
 
 
 
