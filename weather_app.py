@@ -105,33 +105,35 @@ db_port = st.secrets["DB_PORT"]
 #    st.error("Failed to get weather data.")
 
 
-def db_connect():
+def db_connect(selected_city):
     try:
         # Connect to the database
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
         # Fetch data for a specific city
-        #city_name = st.sidebar.selectbox('Select a city', ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath'])
         query = f"SELECT date, temperature FROM weather WHERE location = '{selected_city}'"
-        city_data = pd.read_sql(query, engine)
+        data = pd.read_sql(query, engine)
 
-        return city_data
+        return data
     except Exception as e:
         st.error(f'Error: {e}')
 
+# Select a city from the sidebar
+#selected_city = st.sidebar.selectbox('Select a city', ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath'])
+
 # Connect to the database and fetch data for the selected city
-weather_data = db_connect()
+weather_data = db_connect(selected_city)
 
 # Plot temperature changes for the selected city
 if weather_data is not None:
-    fig, ax = plt.subplots()
-    plt.title(f"Temperature changes in over time")
-    ax.plot(weather_data['date'], weather_data['temperature'], marker='-')
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Temperature changes')
-    ax.grid(True)
+    plt.figure(figsize=(10, 6))
+    plt.plot(weather_data['date'], weather_data['temperature'])
+    plt.title(f"Temperature changes in {selected_city} over time")
+    plt.xlabel('Date')
+    plt.ylabel('Temperature')
     plt.xticks(rotation=45)
+    plt.grid(True)
     plt.tight_layout()
+    st.pyplot()
 else:
     st.error("Failed to get weather data.")
-
