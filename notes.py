@@ -10,7 +10,7 @@ import folium
 from folium.plugins import HeatMap
 
 st.title('Welcome to our Weather App')
-st.write("**Select a city from the side bar to explore its weather.**")
+st.write("**Select a city from the dropdown box to explore its weather.**")
 
 
 def get_details(cities):
@@ -34,7 +34,7 @@ def get_details(cities):
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
-selected_city = st.selectbox('Select a city', cities)
+selected_city = st.selectbox('Choose a city', cities)
 
 weather_data = temperature, latitude, longitude ,condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
