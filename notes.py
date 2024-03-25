@@ -115,31 +115,25 @@ db_port = st.secrets["DB_PORT"]
 
 import datetime
 
-# Fetch data from the database
-import datetime
-
-# Fetch data from the database
-import datetime
 
 # Fetch data from the database
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     end_date = datetime.datetime.now().date()  # Get today's date
-    # Calculate the start date (Yesterday) 
-    start_date = end_date - datetime.timedelta(days=1)
+    # Calculate the start date (Yesterday)
+    start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
     query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}'"
     data = pd.read_sql(query, engine)
     return data
 
-# Get weather data for the most recent day
+# Fetch data from the database
 weather_data = get_data()
 
-# Display the fetched data
-if not weather_data.empty:
-    st.write(weather_data)
-    # Plot the trends for the most recent day
-    st.line_chart(weather_data.set_index('date'))
-else:
-    st.error("Failed to get weather data.")
+# Convert the 'date' column to datetime format
+weather_data['date'] = pd.to_datetime(weather_data['date']).dt.date
 
+# Group by date and calculate the average temperature for each day
+daily_average_temp = weather_data.groupby('date')['temperature'].mean()
 
+# Plot the line chart
+st.line_chart(daily_average_temp)
