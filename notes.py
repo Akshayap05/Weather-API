@@ -13,10 +13,6 @@ st.title('Welcome to our Weather App')
 st.write("**Select a city from the side bar to explore its weather.**")
 
 
-st.title('Welcome to our Weather App')
-st.write("**Select a city from the side bar to explore its weather.**")
-
-
 def get_details(cities):
     try:
         url = f'http://api.weatherapi.com/v1/current.json?key=787a74aa607147a19bb222554241903&q={cities}&aqi=yes'
@@ -26,13 +22,13 @@ def get_details(cities):
         condition = weather['current']['condition']['text']
         icon = weather['current']['condition']['icon']
         humidity = weather['current']['humidity']
-        Cloud_cover = weather['current']['cloud']
-        UV_index = weather['current']['uv']
+        Cloud_cover= weather['current']['cloud']
+        UV_index= weather['current']['uv']
         CO = weather['current']['air_quality']['co']
-        NO2 = weather['current']['air_quality']['no2']
-        Ozone = weather['current']['air_quality']['o3']
+        NO2= weather['current']['air_quality']['no2']
+        Ozone= weather['current']['air_quality']['o3']
         return temperature, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone
-
+        
     except:
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
@@ -41,9 +37,9 @@ selected_city = st.sidebar.selectbox('Select a city', cities)
 
 weather_data = temperature, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
-# Position the information and the image on the page:
+# Position the informaiton and the image on page:
 
-left_col,  right_col, right_hand_col = st.columns([10, 6, 4])
+left_col,  right_col, right_hand_col = st.columns([10,6, 4])
 
 with left_col:
 
@@ -66,23 +62,66 @@ with right_col:
         icon_url = "https:" + icon
         st.image(icon_url, caption='Weather Condition', use_column_width=True)
 
-# Connect to the database and fetch data
 
+
+#connect to db:
+from sqlalchemy import create_engine        
+  
+db_user = st.secrets["DB_USER"]
+db_password = st.secrets["DB_PASSWORD"]
+db_hosts = st.secrets["DB_HOSTS"]
+db_name = st.secrets["DB_NAME"]
+db_port = st.secrets["DB_PORT"]
+
+from sqlalchemy import create_engine
+import streamlit as st
+import pandas as pd
+
+# Fetch database credentials from secrets
 db_user = st.secrets["DB_USER"]
 db_password = st.secrets["DB_PASSWORD"]
 db_host = st.secrets["DB_HOSTS"]
 db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
+#def db_connect():
+#    try:
+#        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#        query = f'SELECT * FROM weather' 
+#        data = pd.read_sql(query, engine)
+#        return data
+#    except Exception as e:
+#        st.error(f'Error: {e}')
+
+
+
+# Connect to the database and fetch data
+#weather_data = db_connect()
+
+# Display the fetched data
+#if weather_data is not None:
+#    st.write(weather_data)
+#else:
+#    st.error("Failed to get weather data.")
+
+
+
+# Fetch data from the database
+#def get_data():
+#    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#    query = "SELECT * FROM weather"
+#    data = pd.read_sql(query, engine)
+#    return data
+
 import datetime
 
 # Fetch data from the database
-def get_data(city):
+def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     end_date = datetime.datetime.now().date()  # Get today's date
     # Calculate the start date (Yesterday)
     start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
-    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE city='{city}' AND date::date BETWEEN '{start_date}' AND '{end_date}'"
+    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE city='{selected_city}' AND date::date BETWEEN '{start_date}' AND '{end_date}'"
     data = pd.read_sql(query, engine)
     return data
 
