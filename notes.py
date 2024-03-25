@@ -115,7 +115,6 @@ db_port = st.secrets["DB_PORT"]
 
 import datetime
 
-
 # Fetch data from the database
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -136,4 +135,4 @@ weather_data['date'] = pd.to_datetime(weather_data['date']).dt.date
 daily_average_temp = weather_data.groupby('date')['temperature'].mean()
 
 # Plot the line chart
-st.line_chart(daily_average_temp)
+st.line_chart(daily_average_temp.set_index('date'))
