@@ -120,10 +120,11 @@ def main():
     if not data.empty:
         st.write("Latest Weather Data:")
         st.write(data)
-        data1 = data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d %H:%M:%S')
+        # Convert date column to datetime format
+        data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d %H:%M:%S')
         # Plot temperature changes over time
         fig, ax = plt.subplots()
-        ax.plot(data1['date'], data1['temperature'], marker='o')
+        ax.plot(data['date'], data['temperature'], marker='o')
         ax.set_title('Temperature Changes Over Time')
         ax.set_xlabel('Date')
         ax.set_ylabel('Temperature (°C)')
