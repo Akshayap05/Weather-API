@@ -152,13 +152,22 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Display the line plot in Streamlit
+import seaborn as sns
 st.pyplot(plt)
 
 #create heatmap:
-import seaborn as sns
+pivot_data = data.pivot(index='location', columns='date', values='temperature')
 
-fig, ax = plt.subplots()
-sns.heatmap(daily_average_temp.corr(), ax=ax)
-st.write(fig)
+# Plot the heatmap
+plt.figure(figsize=(10, 6))
+sns.heatmap(pivot_data, cmap='coolwarm', annot=True, fmt=".1f", linewidths=.5)
+plt.title('Latest Temperature by City')
+plt.xlabel('Date')
+plt.ylabel('City')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Display the heatmap in Streamlit
+st.pyplot(plt)
 
     
