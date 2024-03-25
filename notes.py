@@ -1,13 +1,12 @@
 import streamlit as st
+from streamlit_folium import folium_static
 import requests
 import numpy as np
-#import sqlalchemy
-from sqlalchemy import create_engine
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
-#from dotenv import load_dotenv
-#import os
+import folium
+from folium.plugins import HeatMap
 
 st.title('Welcome to our Weather App')
 st.write("**Select a city from the side bar to explore its weather.**")
@@ -138,46 +137,32 @@ def get_data(selected_city):
 
 
 # Fetch data from the database
-data = get_data(selected_city)
-
-# Calculate average temperature of each day in the date
-daily_average_temp = data.groupby('date')['temperature'].mean()
-
-# Plot the line chart using Matplotlib
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 6))
-plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
-plt.xlabel('Date')
-plt.ylabel('Average Temperature (°C)')
-plt.title(f'Average Temperature in {selected_city}')
-plt.xticks(rotation=45)
-plt.tight_layout()
-
-# Display the line plot in Streamlit
-import seaborn as sns
-st.pyplot(plt)
-
-#create heatmap:
-# Aggregate the data by taking the average temperature for each city and date
-#pivot_data = data.groupby(['location', 'date'])['temperature'].mean().unstack()
-
-
-
-# Pivot the data without specifying the index
-#pivot_data = all_cities_data.pivot(index='location', columns='date', values='temperature')
-
-import folium
-from folium.plugins import HeatMap
-
 def main():
-    temperature_data = data(selected_city)
-    latitude, longitude = data(selected_city)
-    st.write("Map with temperature data:")
-    m = folium.Map(location=[latitude, longitude], zoom_start=10)
+    # Fetch weather data from the database
+    data = get_data(selected_city)
 
-    # Add temperature data as markers
-    for index, row in temperature_data.iterrows():
-        folium.Marker([row['latitude'], row['longitude']], popup=f"Temperature: {row['temperature']}°C").add_to(m)
+    # Calculate average temperature of each day in the date
+    daily_average_temp = data.groupby('date')['temperature'].mean()
+
+    # Plot the line chart using Matplotlib
+    plt.figure(figsize=(10, 6))
+    plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
+    plt.xlabel('Date')
+    plt.ylabel('Average Temperature (°C)')
+    plt.title(f'Average Temperature in {selected_city}')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    # Display the line plot in Streamlit
+    st.pyplot(plt)
+
+    # Create heatmap using Folium
+    st.write("Map with temperature data:")
+    m = folium.Map(location=[weather_data[1], weather_data[2]], zoom_start=10)
+
+    # Add temperature data as HeatMap
+    heat_data = [[row['latitude'], row['longitude'], row['temperature']] for index, row in data.iterrows()]
+    HeatMap(heat_data).add_to(m)
 
     # Display the map
     folium_static(m)
