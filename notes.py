@@ -113,12 +113,22 @@ def main():
         st.pyplot(plt)
 main()
 
-def air_quality(data):
+def plot_air_quality_comparison(data):
     fig, ax = plt.subplots(figsize=(10, 6))
     pollutants = ['CO', 'NO2', 'O3']
     
+    # Check if 'location' column exists in the DataFrame
+    if 'location' not in data.columns:
+        st.error("Location column not found in the data.")
+        return
+
     # Plot bar chart for each pollutant
     for pollutant in pollutants:
+        # Check if the pollutant column exists in the DataFrame
+        if pollutant not in data.columns:
+            st.error(f"{pollutant} column not found in the data.")
+            return
+
         ax.bar(data['location'], data[pollutant], label=pollutant)
 
     plt.xlabel('City')
@@ -133,7 +143,7 @@ def air_quality(data):
 
 # Check if the selected tab is 'Air Quality'
 if tab == 'Air Quality':
-    air_quality(data)
+    plot_air_quality_comparison(data)
 
 
     
