@@ -155,8 +155,10 @@ plt.tight_layout()
 st.pyplot(plt)
 
 #create heatmap:
-#import seaborn as sns
+import seaborn as sns
 
-st.heatmap(daily_average_temp)
+fig, ax = plt.subplots()
+sns.heatmap(daily_average_temp.corr(), ax=ax)
+st.write(fig)
 
     
