@@ -106,22 +106,38 @@ def connect_to_database():
 def fetch_weather_data(connection):
     try:
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM weather")
+        cursor.execute("SELECT timestamp, temperature FROM weather_data ORDER BY timestamp")
         weather_data = cursor.fetchall()
         cursor.close()
         return weather_data
     except psycopg2.Error as e:
-        print(f"Error: {e}")
+        print("Error fetching weather data from the database.")
+        print(e)
         return None
 
-# Define a function to process the weather data
-def process_weather_data(weather_data):
-    if weather_data is not None:
-        for row in weather_data:
-            # Process each row of weather data here
-            print(row)
-    else:
-        print("No weather data available.")
+# Define a function to organize weather data by day
+def organize_by_day(weather_data):
+    organized_data = {}
+    for timestamp, temperature in weather_data:
+        day = timestamp.date()
+        if day not in organized_data:
+            organized_data[day] = []
+        organized_data[day].append((timestamp, temperature))
+    return organized_data
+
+# Define a function to plot weather data for each day
+def plot_weather_data(organized_data):
+    for day, data in organized_data.items():
+        timestamps, temperatures = zip(*data)
+        plt.figure(figsize=(10, 6))
+        plt.plot(timestamps, temperatures, marker='o', linestyle='-')
+        plt.title(f"Weather Changes on {day}")
+        plt.xlabel("Time")
+        plt.ylabel("Temperature (°C)")
+        plt.xticks(rotation=45)
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
 
 # Define the main function to execute the script
 def main():
@@ -130,8 +146,11 @@ def main():
     if connection is not None:
         # Fetch weather data
         weather_data = fetch_weather_data(connection)
-        # Process weather data
-        process_weather_data(weather_data)
+        if weather_data is not None:
+            # Organize weather data by day
+            organized_data = organize_by_day(weather_data)
+            # Plot weather data for each day
+            plot_weather_data(organized_data)
         # Close the database connection
         connection.close()
     else:
