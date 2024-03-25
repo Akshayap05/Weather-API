@@ -48,14 +48,14 @@ left_col, right_col, right_hand_col = st.columns([15, 6, 4])
 
 if tab == "Weather":
     with left_col:
-        st.title(f"{selected_city} Weather")
+        st.title(f"#{selected_city} Weather")
         st.write(f"Temperature: {temperature}°C")
         st.write(f"Condition: {condition}")
         st.write(f"Humidity: {humidity}%")
         st.write(f"Cloud Cover: {Cloud_cover}%")
 elif tab == "Air Quality":
     with left_col:
-        st.markdown(f"####################### {selected_city} Air Quality")
+        st.markdown(f"#{selected_city} Air Quality")
         st.write(f"UV Index: {UV_index}")
         st.write(f"CO: {CO}")
         st.write(f"NO2: {NO2}")
