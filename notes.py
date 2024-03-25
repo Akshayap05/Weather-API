@@ -113,19 +113,29 @@ def main():
         st.pyplot(plt)
 main()
 
-# Plot bar chart for each pollutant
-if tab =='Air Quality':
+def air_quality(data):
     fig, ax = plt.subplots(figsize=(10, 6))
-    data.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('Pollutant')
+    pollutants = ['CO', 'NO2', 'O3']
+    
+    # Plot bar chart for each pollutant
+    for pollutant in pollutants:
+        ax.bar(data['location'], data[pollutant], label=pollutant)
+
+    plt.xlabel('City')
     plt.ylabel('Concentration')
     plt.title('Air Quality Comparison')
-    plt.xticks(rotation=0)
-    plt.legend(loc='upper right')
+    plt.xticks(rotation=45)
+    plt.legend()
     plt.tight_layout()
 
     # Display the plot
     st.pyplot(fig)
+
+# Check if the selected tab is 'Air Quality'
+if tab == 'Air Quality':
+    air_quality(data)
+
+
     
 
 
