@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_folium import folium_static
+from sqlalchemy import create_engine
 import requests
 import numpy as np
 import psycopg2
@@ -69,21 +70,7 @@ with right_col:
         st.image(icon_url, caption='Weather Condition', use_column_width=True)
 
 
-
-
 #connect to db:
-from sqlalchemy import create_engine        
-  
-db_user = st.secrets["DB_USER"]
-db_password = st.secrets["DB_PASSWORD"]
-db_hosts = st.secrets["DB_HOSTS"]
-db_name = st.secrets["DB_NAME"]
-db_port = st.secrets["DB_PORT"]
-
-from sqlalchemy import create_engine
-import streamlit as st
-import pandas as pd
-
 # Fetch database credentials from secrets
 db_user = st.secrets["DB_USER"]
 db_password = st.secrets["DB_PASSWORD"]
@@ -91,36 +78,6 @@ db_host = st.secrets["DB_HOSTS"]
 db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
-#def db_connect():
-#    try:
-#        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-#        query = f'SELECT * FROM weather' 
-#        data = pd.read_sql(query, engine)
-#        return data
-#    except Exception as e:
-#        st.error(f'Error: {e}')
-
-
-
-# Connect to the database and fetch data
-#weather_data = db_connect()
-
-# Display the fetched data
-#if weather_data is not None:
-#    st.write(weather_data)
-#else:
-#    st.error("Failed to get weather data.")
-
-
-
-# Fetch data from the database
-#def get_data():
-#    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-#    query = "SELECT * FROM weather"
-#    data = pd.read_sql(query, engine)
-#    return data
-
-#import datetime
 
 # Retrieve data from the database
 
@@ -149,7 +106,7 @@ def main():
     plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
     plt.xlabel('Date')
     plt.ylabel('Average Temperature (°C)')
-    plt.title(f'Average Temperature in {selected_city}')
+    plt.title(f'Average Temperature in {selected_city} over time')
     plt.xticks(rotation=45)
     plt.tight_layout()
 
@@ -157,9 +114,7 @@ def main():
     st.pyplot(plt)
 
 
-
-if __name__ == "__main__":
-    main()
+main()
 
 
     
