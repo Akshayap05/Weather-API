@@ -115,7 +115,7 @@ main()
 
 def plot_air_quality_comparison(data):
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutants = ['CO', 'NO2', 'O3']
+    pollutants = ['co', 'no2', 'o3']
     
     # Check if 'location' column exists in the DataFrame
     if 'location' not in data.columns:
