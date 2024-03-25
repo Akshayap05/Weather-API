@@ -156,7 +156,8 @@ import seaborn as sns
 st.pyplot(plt)
 
 #create heatmap:
-pivot_data = data.pivot(index='location', columns='date', values='temperature')
+# Aggregate the data by taking the average temperature for each city and date
+pivot_data = data.groupby(['location', 'date'])['temperature'].mean().unstack()
 
 # Plot the heatmap
 plt.figure(figsize=(10, 6))
@@ -169,5 +170,6 @@ plt.tight_layout()
 
 # Display the heatmap in Streamlit
 st.pyplot(plt)
+
 
     
