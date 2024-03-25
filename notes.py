@@ -169,4 +169,6 @@ def daily_average_temp():
         st.pyplot(daily_average_temp)
     else:
         st.error('No data available')
+
+daily_average_temp()
     
