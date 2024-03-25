@@ -130,13 +130,13 @@ latest_data = get_latest_data(selected_city)
 
 # Plot air quality comparison for the latest data
 
-def plot_air_quality_comparison(data):
+
+def plot_air_quality_comparison(latest_data):
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutants = ['co', 'no2', 'o3']
-    data.plot(kind='bar', x='location', ax=ax)
+    pollutants = ['CO', 'NO2', 'O3']
     
     # Check if 'location' column exists in the DataFrame
-    if 'location' not in data.columns:
+    if 'location' not in latest_data.columns:
         st.error("Location column not found in the data.")
         return
 
@@ -148,8 +148,7 @@ def plot_air_quality_comparison(data):
             return
 
         ax.bar(data['location'], data[pollutant], label=pollutant)
-        
-    plt.xlabel('Pollutant')
+
     plt.xlabel('City')
     plt.ylabel('Concentration')
     plt.title('Air Quality Comparison')
@@ -157,15 +156,15 @@ def plot_air_quality_comparison(data):
     plt.legend()
     plt.tight_layout()
 
-
     # Display the plot
     st.pyplot(fig)
 
-plot_air_quality_comparison(latest_data)
-
 # Check if the selected tab is 'Air Quality'
 if tab == 'Air Quality':
-    plot_air_quality_comparison(data)
+    plot_air_quality_comparison(latest_data)
+
+#plot_air_quality_comparison(latest_data)
+
 
 
     
