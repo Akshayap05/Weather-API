@@ -48,7 +48,7 @@ left_col, right_col, right_hand_col = st.columns([15, 6, 4])
 
 if tab == "Weather":
     with left_col:
-        st.title("#" + {selected_city} + "Weather")
+        st.title(f"{selected_city} Weather")
         st.write(f"Temperature: {temperature}°C")
         st.write(f"Condition: {condition}")
         st.write(f"Humidity: {humidity}%")
