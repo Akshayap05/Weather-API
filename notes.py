@@ -37,7 +37,7 @@ selected_city = st.selectbox('Select a city', cities)
 
 weather_data = temperature, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
-tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
+tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 
 # Position the informaiton and the image on page:
