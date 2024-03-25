@@ -118,17 +118,16 @@ def db_connect(selected_city):
     except Exception as e:
         st.error(f'Error: {e}')
 
-# Select a city from the sidebar
-#selected_city = st.sidebar.selectbox('Select a city', ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath'])
 
 # Connect to the database and fetch data for the selected city
 weather_data = db_connect(selected_city)
 
+# Ensure that the weather_data DataFrame contains the necessary columns (date and temperature)
 # Plot temperature changes for the selected city
 if weather_data is not None:
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(weather_data['date'], weather_data['temperature'])
-    ax.set_title(f"Temperature changes in {selected_city} over time")  
+    ax.set_title(f"Temperature changes in {selected_city} over time")
     ax.set_xlabel('Date')  # Use set_xlabel instead of xlabel
     ax.set_ylabel('Temperature')  # Use set_ylabel instead of ylabel
     plt.xticks(rotation=45)
@@ -137,3 +136,4 @@ if weather_data is not None:
     st.pyplot(fig)
 else:
     st.error("Failed to get weather data.")
+
