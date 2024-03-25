@@ -150,7 +150,7 @@ if daily_average_temp:
     plt.xticks(rotation=45)
     plt.tight_layout()
 else:
-    st.error('No data available to plot')
+    st.error('No data available')
 
 # Display the plot in Streamlit
-st.pyplot(plt)
+st.pyplot(daily_average_temp)
