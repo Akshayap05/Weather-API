@@ -126,14 +126,15 @@ weather_data = db_connect(selected_city)
 
 # Plot temperature changes for the selected city
 if weather_data is not None:
-    plt.figure(figsize=(10, 6))
-    plt.plot(weather_data['date'], weather_data['temperature'])
-    plt.title(f"Temperature changes in {selected_city} over time")
-    plt.xlabel('Date')
-    plt.ylabel('Temperature')
+    fig, ax = plt.subplots()
+    ax.figure(figsize=(10, 6))
+    ax.plot(weather_data['date'], weather_data['temperature'])
+    ax.title(f"Temperature changes in {selected_city} over time")
+    ax.xlabel('Date')
+    ax.ylabel('Temperature')
     plt.xticks(rotation=45)
-    plt.grid(True)
+    ax.grid(True)
     plt.tight_layout()
-    st.pyplot()
+    st.pyplot(fig)
 else:
     st.error("Failed to get weather data.")
