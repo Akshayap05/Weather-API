@@ -113,13 +113,18 @@ db_port = st.secrets["DB_PORT"]
 #    data = pd.read_sql(query, engine)
 #    return data
 
+import datetime
+
+# Fetch data from the database
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = "SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather GROUP BY day"
+    end_date = datetime.datetime.now().date()  # Get today's date
+    start_date = end_date - datetime.timedelta(days=6)  # Get the date 7 days ago
+    query = f"SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}' GROUP BY day"
     data = pd.read_sql(query, engine)
     return data
 
-# Get aggregated weather data by day
+# Get aggregated weather data for the last seven days
 weather_data = get_data()
 
 # Display the fetched data
@@ -128,5 +133,5 @@ if not weather_data.empty:
 else:
     st.error("Failed to get weather data.")
 
-# Plot the trends
+# Plot the trends for the last seven days
 st.line_chart(weather_data.set_index('day'))
