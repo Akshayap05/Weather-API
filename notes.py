@@ -47,18 +47,20 @@ left_col,  right_col, right_hand_col = st.columns([15,6, 4])
 
 
 if tab == "Weather":
-    st.title(f"{selected_city} Weather")
-    st.write(f"Temperature: {temperature}°C")
-    st.write(f"Condition: {condition}")
-    st.write(f"Humidity: {humidity}%")
-    st.write(f"Cloud Cover: {Cloud_cover}%")
+    with left_col:
+        st.title(f"{selected_city} Weather")
+        st.write(f"Temperature: {temperature}°C")
+        st.write(f"Condition: {condition}")
+        st.write(f"Humidity: {humidity}%")
+        st.write(f"Cloud Cover: {Cloud_cover}%")
    
 elif tab == "Air Quality":
-    st.title(f"{selected_city} Air Quality")
-    st.write(f"UV Index: {UV_index}")
-    st.write(f"CO: {CO}")
-    st.write(f"NO2: {NO2}")
-    st.write(F"Ozone (O3): {Ozone}")
+    with left_col:
+        st.title(f"{selected_city} Weather")
+        st.write(f"Temperature: {temperature}°C")
+        st.write(f"Condition: {condition}")
+        st.write(f"Humidity: {humidity}%")
+        st.write(f"Cloud Cover: {Cloud_cover}%")
 else:
     st.error("Failed to get data.")
 
