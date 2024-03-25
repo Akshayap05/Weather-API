@@ -119,25 +119,30 @@ def get_data():
     data = pd.read_sql(query, engine)
     return data
 
+def temperature_by_day(data):
+    # Convert date column to datetime format
+    data['date'] = pd.to_datetime(data['date'])
 
+    # Group data by day of the week and calculate average temperature
+    data['day_of_week'] = data['date'].dt.day_name()
+    average_temperature = data.groupby('day_of_week')['temperature'].mean()
+
+    # Plot the average temperature for each day
+    plt.bar(average_temperature.index, average_temperature)
+    plt.xlabel('Day of the Week')
+    plt.ylabel('Average Temperature (°C)')
+    plt.title('Average Temperature by Day of the Week')
+    plt.xticks(rotation=45)
+    st.pyplot()
+
+# Main function
 def main():
-    st.title('Weather Data from PostgreSQL Database')
+    st.title('Average Temperature by Day of the Week')
     data = get_data()
     if not data.empty:
-        st.write("Latest Weather Data:")
-        st.write(data)
-        # Convert date column to datetime format
-        data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d %H:%M')
-        # Plot temperature changes over time
-        fig, ax = plt.subplots()
-        ax.plot(data['date'], data['temperature'], marker='o')
-        ax.set_title('Temperature Changes Over Time')
-        ax.set_xlabel('Date')
-        ax.set_ylabel('Temperature (°C)')
-        ax.grid(True)
-        plt.xticks(rotation=45)
-        st.pyplot(fig)
+        temperature_by_day(data)
     else:
         st.error("No data available.")
 
-main()
+if __name__ == "__main__":
+    main()
