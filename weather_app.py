@@ -107,9 +107,15 @@ db_port = st.secrets["DB_PORT"]
 
 
 # Fetch data from the database
+#def get_data():
+#    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#    query = "SELECT * FROM weather"
+#    data = pd.read_sql(query, engine)
+#    return data
+
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = "SELECT * FROM weather"
+    query = "SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather"
     data = pd.read_sql(query, engine)
     return data
 
