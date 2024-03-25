@@ -124,9 +124,14 @@ weather_data = db_connect(selected_city)
 
 # Ensure that the weather_data DataFrame contains the necessary columns (date and temperature)
 # Plot temperature changes for the selected city
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Plot line plot with markers for temperature changes over time
 if weather_data is not None:
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.scatter(weather_data['date'], weather_data['temperature'], marker='o', color='blue', alpha=0.5)
+    ax.plot(weather_data['date'], weather_data['temperature'], marker='o', color='blue', linestyle='-', alpha=0.5)
     ax.set_title(f"Temperature changes in {selected_city} over time")
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature')
@@ -136,4 +141,5 @@ if weather_data is not None:
     st.pyplot(fig)
 else:
     st.error("Failed to get weather data.")
+
 
