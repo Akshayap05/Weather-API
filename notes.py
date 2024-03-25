@@ -159,7 +159,7 @@ st.pyplot(plt)
 # Aggregate the data by taking the average temperature for each city and date
 #pivot_data = data.groupby(['location', 'date'])['temperature'].mean().unstack()
 
-pivot_data = data.pivot(columns='date', values='temperature')
+pivot_data = data.pivot(columns=['date', 'location'], values='temperature')
 
 # Plot the heatmap
 plt.figure(figsize=(12, 8))
