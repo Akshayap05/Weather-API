@@ -119,6 +119,15 @@ def main():
     if not data.empty:
         st.write("Latest Weather Data:")
         st.write(data)
+        # Plot temperature changes over time
+        fig, ax = plt.subplots()
+        ax.plot(weather_data['date'], weather_data['temperature'], marker='o')
+        ax.set_title('Temperature Changes Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Temperature (°C)')
+        ax.grid(True)
+        plt.xticks(rotation=45)
+        st.pyplot(fig)
     else:
         st.error("No data available.")
 
