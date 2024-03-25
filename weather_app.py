@@ -84,26 +84,52 @@ db_host = st.secrets["DB_HOSTS"]
 db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
-def db_connect():
-    try:
-        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-        query = f'SELECT * FROM weather' 
-        data = pd.read_sql(query, engine)
-        return data
-    except Exception as e:
-        st.error(f'Error: {e}')
+#def db_connect():
+#    try:
+#        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#        query = f'SELECT * FROM weather' 
+#        data = pd.read_sql(query, engine)
+#        return data
+#    except Exception as e:
+#        st.error(f'Error: {e}')
 
 
 
 # Connect to the database and fetch data
-weather_data = db_connect()
+#weather_data = db_connect()
 
 # Display the fetched data
+#if weather_data is not None:
+#    st.write(weather_data)
+#else:
+#    st.error("Failed to get weather data.")
+
+
+def db_connect():
+    try:
+        # Connect to the database
+        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+        # Fetch data for each city
+        #cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
+        data = {}
+        for city in cities:
+            query = f'SELECT date, temperature FROM weather WHERE location = \'{city}\' ORDER BY date DESC LIMIT 10'
+            city_data = pd.read_sql(query, engine)
+            data[city] = city_data
+
+        return data
+    except Exception as e:
+        st.error(f'Error: {e}')
+
+# Connect to the database and fetch data
+weather_data = db_connect()
+
+# Plot temperature changes for each city
 if weather_data is not None:
-    st.write(weather_data)
+    for city, city_data in weather_data.items():
+        st.subheader(f"Temperature changes in {city}")
+        st.line_chart(city_data.set_index('date')['temperature'])
 else:
     st.error("Failed to get weather data.")
-
-
-
 
