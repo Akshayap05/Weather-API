@@ -125,7 +125,7 @@ weather_data_db = db_connect(selected_city)
 # Plot temperature changes for the selected city
 
 # Convert 'date' column to datetime format with custom format specifier
-weather_data_db['date'] = pd.to_datetime(weather_data_db['date'], format='%Y-%m-%d %H:%M:%S')
+weather_data_db['date'] = pd.to_date(weather_data_db['date'], format='%Y-%m-%d ')
 
 # Plot line plot with markers for temperature changes over time
 if weather_data_db is not None:
