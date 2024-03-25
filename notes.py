@@ -121,7 +121,7 @@ def get_data():
     end_date = datetime.datetime.now().date()  # Get today's date
     # Calculate the start date (Yesterday)
     start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
-    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}'"
+    query = f"SELECT date AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}'"
     data = pd.read_sql(query, engine)
     return data
 
