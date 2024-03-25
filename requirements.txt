@@ -8,5 +8,4 @@ numpy
 sqlalchemy
 seaborn
 folium
-HeatMap
 streamlit_folium
