@@ -119,12 +119,15 @@ import datetime
 def get_data():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     end_date = datetime.datetime.now().date()  # Get today's date
-    start_date = end_date - datetime.timedelta(days=6)  # Get the date 7 days ago
+    # Find the most recent Friday
+    end_date -= datetime.timedelta(days=end_date.weekday() + 1) % 7
+    # Calculate the start date (Friday) of the week before the most recent Friday
+    start_date = end_date - datetime.timedelta(days=6)
     query = f"SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather WHERE date::date BETWEEN '{start_date}' AND '{end_date}' GROUP BY day"
     data = pd.read_sql(query, engine)
     return data
 
-# Get aggregated weather data for the last seven days
+# Get aggregated weather data for the last seven days starting from the most recent Friday
 weather_data = get_data()
 
 # Display the fetched data
