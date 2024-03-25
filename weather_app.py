@@ -118,34 +118,27 @@ def db_connect(selected_city):
     except Exception as e:
         st.error(f'Error: {e}')
 
-
 # Connect to the database and fetch data for the selected city
-weather_data = db_connect(selected_city)
+weather_data_db = db_connect(selected_city)
 
 # Ensure that the weather_data DataFrame contains the necessary columns (date and temperature)
 # Plot temperature changes for the selected city
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 
-# Plot line plot with markers for temperature changes over time
-# Assuming the 'date' column in weather_data is not in datetime format
 # Convert 'date' column to datetime format with custom format specifier
-weather_data['date'] = pd.to_datetime(weather_data['date'], format='%m-%d %H')
+weather_data_db['date'] = pd.to_datetime(weather_data_db['date'], format='%Y-%m-%d %H:%M:%S')
 
 # Plot line plot with markers for temperature changes over time
-if weather_data is not None:
- 
+if weather_data_db is not None:
     fig, ax = plt.subplots()
-    ax.plot(weather_data['date'], weather_data['temperature'], marker='o')
+    ax.plot(weather_data_db['date'], weather_data_db['temperature'], marker='o')
     ax.set_title(f'Temperature changes in {selected_city} over time')
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature')
     ax.grid(True)
     plt.xticks(rotation=45)
     plt.tight_layout()
+    st.pyplot(fig)
 else:
-    st.error("Failed to get weather data.")
-
+    st.error("Failed to get weather data from the database.")
 
 
