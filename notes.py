@@ -117,11 +117,13 @@ main()
 def get_latest_data_for_all_cities():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = """
-            SELECT DISTINCT (date) AS date, DISTINCT(location) AS location, temperature, co, no2, o3 
+            SELECT date, location, temperature, co, no2, o3 
             FROM student.weather 
-            WHERE date = (
-                SELECT MAX(date) 
+            WHERE (date, location) IN (
+                SELECT date, location
                 FROM student.weather
+                GROUP BY date, location
+                HAVING date = MAX(date)
             )
             """
     latest_data_all_cities = pd.read_sql(query, engine)
