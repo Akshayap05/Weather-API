@@ -159,7 +159,14 @@ st.pyplot(plt)
 # Aggregate the data by taking the average temperature for each city and date
 #pivot_data = data.groupby(['location', 'date'])['temperature'].mean().unstack()
 
-pivot_data = data.pivot(columns=['date', 'location'], values='temperature')
+# Fetch data from the database for all cities
+all_cities_data = pd.DataFrame()
+for city in cities:
+    city_data = get_data(city)
+    all_cities_data = pd.concat([all_cities_data, city_data])
+
+# Pivot the data without specifying the index
+pivot_data = all_cities_data.pivot(index='location', columns='date', values='temperature')
 
 # Plot the heatmap
 plt.figure(figsize=(12, 8))
