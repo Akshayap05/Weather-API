@@ -1,4 +1,3 @@
-psycopg2
 requests
 pandas
 datetime
@@ -6,4 +5,4 @@ streamlit
 matplotlib
 psycopg2-binary
 numpy
-sqlalchemy==4.10.0
+sqlalchemy
