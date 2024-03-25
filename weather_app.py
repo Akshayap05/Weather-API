@@ -138,7 +138,7 @@ if weather_data is not None:
  
     fig, ax = plt.subplots()
     ax.plot(weather_data['date'], weather_data['temperature'], marker='o')
-    ax.set_title('Temperature changes in {selected_city} over time')
+    ax.set_title(f'Temperature changes in {selected_city} over time')
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature')
     ax.grid(True)
