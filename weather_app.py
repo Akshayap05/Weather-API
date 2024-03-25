@@ -121,7 +121,7 @@ def main():
         st.write(data)
         # Plot temperature changes over time
         fig, ax = plt.subplots()
-        ax.plot(weather_data['date'], weather_data['temperature'], marker='o')
+        ax.plot(data['date'], data['temperature'], marker='o')
         ax.set_title('Temperature Changes Over Time')
         ax.set_xlabel('Date')
         ax.set_ylabel('Temperature (°C)')
