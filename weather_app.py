@@ -119,18 +119,18 @@ def db_connect(selected_city):
         st.error(f'Error: {e}')
 
 # Connect to the database and fetch data for the selected city
-weather_data_db = db_connect(selected_city)
+data = db_connect(selected_city)
 
 # Ensure that the weather_data DataFrame contains the necessary columns (date and temperature)
 # Plot temperature changes for the selected city
 
 # Convert 'date' column to datetime format with custom format specifier
-weather_data_db['date'] = pd.to_date(weather_data_db['date'], format='%Y-%m-%d ')
+#data['date'] = pd.to_date(data['date'], format='%Y-%m-%d ')
 
 # Plot line plot with markers for temperature changes over time
-if weather_data_db is not None:
+if data is not None:
     fig, ax = plt.subplots()
-    ax.plot(weather_data_db['date'], weather_data_db['temperature'], marker='o')
+    ax.plot(data['date'], data['temperature'], marker='o')
     ax.set_title(f'Temperature changes in {selected_city} over time')
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature')
