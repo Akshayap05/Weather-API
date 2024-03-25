@@ -5,7 +5,7 @@ import numpy as np
 from sqlalchemy import create_engine
 import psycopg2
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #from dotenv import load_dotenv
 #import os
 
@@ -110,26 +110,28 @@ def db_connect():
         # Connect to the database
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
-        # Fetch data for each city
-        #cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
-        data = {}
-        for city in cities:
-            query = f'SELECT date, temperature FROM weather WHERE location = \'{city}\' ORDER BY date DESC LIMIT 10'
-            city_data = pd.read_sql(query, engine)
-            data[city] = city_data
+        # Fetch data for a specific city
+        #city_name = st.sidebar.selectbox('Select a city', ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath'])
+        query = f"SELECT date, temperature FROM weather WHERE location = '{selected_city}'"
+        city_data = pd.read_sql(query, engine)
 
-        return data
+        return city_data
     except Exception as e:
         st.error(f'Error: {e}')
 
-# Connect to the database and fetch data
+# Connect to the database and fetch data for the selected city
 weather_data = db_connect()
 
-# Plot temperature changes for each city
+# Plot temperature changes for the selected city
 if weather_data is not None:
-    for city, city_data in weather_data.items():
-        st.subheader(f"Temperature changes in {city}")
-        st.line_chart(city_data.set_index('date')['temperature'])
+    fig, ax = plt.subplots()
+    plt.set_title(f"Temperature changes in over time")
+    ax.plot(weather_data['date'], weather_data['temperature'], marker='-')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Temperature changes')
+    ax.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
 else:
     st.error("Failed to get weather data.")
 
