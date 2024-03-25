@@ -113,57 +113,39 @@ def main():
         st.pyplot(plt)
 main()
 
-def get_latest_data(selected_city):
+# Retrieve latest data for all cities
+def get_latest_data_for_all_cities():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = f"""
+    query = """
             SELECT date, location, temperature, co, no2, o3 
             FROM student.weather 
-            WHERE location='{selected_city}' 
-            ORDER BY date DESC
-            LIMIT 1
+            WHERE date = (
+                SELECT MAX(date) 
+                FROM student.weather
+            )
             """
-    latest_data = pd.read_sql(query, engine)
-    return latest_data
+    latest_data_all_cities = pd.read_sql(query, engine)
+    return latest_data_all_cities
 
-# Fetch the latest data for the selected city
-latest_data = get_latest_data(selected_city)
+# Fetch the latest data for all cities
+latest_data_all_cities = get_latest_data_for_all_cities()
 
-# Plot air quality comparison for the latest data
-
-
-def plot_air_quality_comparison(latest_data):
+# Plot air quality comparison for all cities
+def plot_air_quality_comparison_all_cities(data):
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutants = ['co', 'no2', 'o3']
-    
-    # Check if 'location' column exists in the DataFrame
-    if 'location' not in latest_data.columns:
-        st.error("Location column not found in the data.")
-        return
-
-    # Plot bar chart for each pollutant
-    for pollutant in pollutants:
-        # Check if the pollutant column exists in the DataFrame
-        if pollutant not in data.columns:
-            st.error(f"{pollutant} column not found in the data.")
-            return
-
-        ax.bar(data['location'], data[pollutant], label=pollutant)
-
+    data.plot(kind='bar', x='location', ax=ax)
     plt.xlabel('City')
     plt.ylabel('Concentration')
-    plt.title('Air Quality Comparison')
+    plt.title('Air Quality Comparison for All Cities')
     plt.xticks(rotation=45)
-    plt.legend()
+    plt.legend(loc='upper right')
     plt.tight_layout()
 
     # Display the plot
     st.pyplot(fig)
 
-# Check if the selected tab is 'Air Quality'
-if tab == 'Air Quality':
-    plot_air_quality_comparison(latest_data)
-
-#plot_air_quality_comparison(latest_data)
+# Plot air quality comparison for all cities using the latest data
+plot_air_quality_comparison_all_cities(latest_data_all_cities)
 
 
 
