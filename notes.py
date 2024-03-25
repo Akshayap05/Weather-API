@@ -115,7 +115,7 @@ main()
 
 # Plot bar chart for each pollutant
 if tab =='Air Quality':
-    st.subheader(f'Air Quality in {selected_city}')
+    st.subheader(f'{selected_city}')
     fig, ax = plt.subplots(figsize=(10, 6))
     data.plot(kind='bar', x='location', ax=ax)
     plt.xlabel('Pollutant')
