@@ -64,7 +64,7 @@ else:
     st.error("Failed to get data.")
 
 # Display weather condition icon in the right column
-with right_col:
+with right_hand_col:
     if weather_data:
         icon_url = "https:" + icon
         st.image(icon_url, caption='Weather Condition', use_column_width=True)
