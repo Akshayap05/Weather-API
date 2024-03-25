@@ -58,7 +58,7 @@ elif tab == "Air Quality":
         st.write(f"UV Index: {UV_index}")
         st.write(f"CO: {CO}")
         st.write(f"NO2: {NO2}")
-        st.write(f"Ozone (O3): {Ozone}")
+        st.write(f"Ozone (O3): {Ozone}")    
 else:
     st.error("Failed to get data.")
 
@@ -96,40 +96,41 @@ data = get_data(selected_city)
 
 # Fetch data from the database
 def main():
-
+    if tab =='Weather':
     # Calculate average temperature of each day in the date
-    daily_average_temp = data.groupby('date')['temperature'].mean()
+        daily_average_temp = data.groupby('date')['temperature'].mean()
 
     # Plot the line chart using Matplotlib
-    plt.figure(figsize=(10, 6))
-    plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
-    plt.xlabel('Date')
-    plt.ylabel('Average Temperature (°C)')
-    plt.title(f'Average Temperature in {selected_city} over time')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+        plt.figure(figsize=(10, 6))
+        plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
+        plt.xlabel('Date')
+        plt.ylabel('Average Temperature (°C)')
+        plt.title(f'Average Temperature in {selected_city} over time')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
 
     # Display the line plot in Streamlit
-    st.pyplot(plt)
-
+        st.pyplot(plt)
+main()
 
 # Plot bar chart for each pollutant
-st.subheader(f'Air Quality in {selected_city}')
-fig, ax = plt.subplots(figsize=(10, 6))
-data.plot(kind='bar', x='location', ax=ax)
-plt.xlabel('Pollutant')
-plt.ylabel('Concentration')
-plt.title('Air Quality Comparison')
-plt.xticks(rotation=0)
-plt.legend(loc='upper right')
-plt.tight_layout()
+if tab =='Air Quality':
+    st.subheader(f'Air Quality in {selected_city}')
+    fig, ax = plt.subplots(figsize=(10, 6))
+    data.plot(kind='bar', x='location', ax=ax)
+    plt.xlabel('Pollutant')
+    plt.ylabel('Concentration')
+    plt.title('Air Quality Comparison')
+    plt.xticks(rotation=0)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
 
-# Display the plot
-st.pyplot(fig)
+    # Display the plot
+    st.pyplot(fig)
     
 
 
-main()
+
 
 
     
