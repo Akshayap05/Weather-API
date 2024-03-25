@@ -159,26 +159,29 @@ st.pyplot(plt)
 # Aggregate the data by taking the average temperature for each city and date
 #pivot_data = data.groupby(['location', 'date'])['temperature'].mean().unstack()
 
-# Fetch data from the database for all cities
-all_cities_data = pd.DataFrame()
-for city in cities:
-    city_data = get_data(city)
-    all_cities_data = pd.concat([all_cities_data, city_data])
+
 
 # Pivot the data without specifying the index
-pivot_data = all_cities_data.pivot(index='location', columns='date', values='temperature')
+#pivot_data = all_cities_data.pivot(index='location', columns='date', values='temperature')
+
+import folium
+from folium.plugins import HeatMap
 
 # Plot the heatmap
-plt.figure(figsize=(12, 8))
-sns.heatmap(pivot_data, cmap='coolwarm', annot=True, fmt=".1f", linewidths=.5)
-plt.title('Latest Temperature by City')
-plt.xlabel('Date')
-plt.ylabel('City')
-plt.xticks(rotation=45)
-plt.tight_layout()
+if not data.empty:
+    # Create a Folium map centered around the UK
+    m = folium.Map(location=[54.5260, -3.3086], zoom_start=6)
 
-# Display the heatmap in Streamlit
-st.pyplot(plt)
+    # Convert temperature data to heatmap format
+    heatmap_data = [(row['latitude'], row['longitude'], row['temperature']) for index, row in data.iterrows()]
+
+    # Add heatmap layer to the map
+    HeatMap(heatmap_data).add_to(m)
+
+    # Display the map
+    st.write(m)
+else:
+    st.error("Failed to get data from the database.")
 
 
     
