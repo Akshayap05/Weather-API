@@ -125,7 +125,7 @@ weather_data = db_connect()
 # Plot temperature changes for the selected city
 if weather_data is not None:
     fig, ax = plt.subplots()
-    plt.set_title(f"Temperature changes in over time")
+    plt.title(f"Temperature changes in over time")
     ax.plot(weather_data['date'], weather_data['temperature'], marker='-')
     ax.set_xlabel('Date')
     ax.set_ylabel('Temperature changes')
