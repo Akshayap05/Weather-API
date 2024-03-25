@@ -118,6 +118,10 @@ def db_connect(selected_city):
 data = db_connect(selected_city)
 
 # Ensure that the data DataFrame contains the necessary columns (date and temperature)
+# Convert 'date' column to datetime format
+data['date'] = pd.to_datetime(data['date'])
+
+# Plot scatter plot with markers for temperature changes over time
 if data is not None:
     fig, ax = plt.subplots()
     ax.scatter(data['date'], data['temperature'])
@@ -131,5 +135,6 @@ if data is not None:
     st.pyplot(fig)
 else:
     st.error("Failed to get weather data from the database.")
+
 
 
