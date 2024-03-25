@@ -105,50 +105,5 @@ else:
     st.error("Failed to get weather data.")
 
 
-#def db_connect():
-    #engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_hosts}:{db_port}/{db_name}')
-    #engine.connect
-    #query = f'SELECT * FROM student.weather' 
-    #data = pd.read_sql(query, engine)
-    #return data
-
-
-# connect to db:
-
-#import os
-
-# Get database credentials
-#db_user = os.getenv("DB_USER")
-#db_password = os.getenv("DB_PASSWORD")
-#db_host = os.getenv("DB_HOSTS")
-#db_name = os.getenv("DB_NAME")
-#db_port = os.getenv("5432")
-
-#@st.cache(allow_output_mutation=True)
-#def init_connection():
-#    conn = psycopg2.connect(
-#        db_user,
-#        db_password,
-#        db_host,
-#        db_port,
-#        db_name
-#    )
-#    return conn
-
-#conn = init_connection()
-
-## Run query
-#@st.cache
-#def run_query(query):
-#    with conn.cursor() as cur:
-#        cur.execute(query)
-#        return cur.fetchall()
-
-#rows = run_query("SELECT location, time_updated, temperature FROM weather LIMIT 15")
-
-# Display data
-#data = pd.DataFrame(rows, columns=['Location', 'Time Updated', 'Temperature'])
-#st.table(data)
-
 
 
