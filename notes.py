@@ -166,7 +166,7 @@ def daily_average_temp():
         plt.title(f'Average Temperature in {selected_city}')
         plt.xticks(rotation=45)
         plt.tight_layout()
-        st.pyplot(daily_average_temp)
+        st.pyplot(temp_avg)
     else:
         st.error('No data available')
 
