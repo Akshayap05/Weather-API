@@ -141,14 +141,16 @@ data = get_data(selected_city)
 daily_average_temp = data.groupby('date')['temperature'].mean()
 
 # Plot the line chart using Matplotlib
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 6))
-plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
-plt.xlabel('Date')
-plt.ylabel('Average Temperature (°C)')
-plt.title(f'Average Temperature in {selected_city}')
-plt.xticks(rotation=45)
-plt.tight_layout()
+if daily_average_temp:
+    plt.figure(figsize=(10, 6))
+    plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
+    plt.xlabel('Date')
+    plt.ylabel('Average Temperature (°C)')
+    plt.title(f'Average Temperature in {selected_city}')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+else:
+    st.error('No data available to plot')
 
 # Display the plot in Streamlit
 st.pyplot(plt)
