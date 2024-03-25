@@ -43,7 +43,7 @@ tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 # Position the informaiton and the image on page:
 
-left_col, right_col, right_hand_col = st.columns([15, 4, 8])
+left_col, right_col, right_hand_col = st.columns([15, 2, 8])
 
 if tab == "Weather":
     with left_col:
