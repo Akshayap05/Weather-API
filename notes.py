@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import numpy as np
 #import sqlalchemy
-#from sqlalchemy import create_engine
+from sqlalchemy import create_engine
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -84,78 +84,49 @@ db_host = st.secrets["DB_HOSTS"]
 db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
-import psycopg2
+#def db_connect():
+#    try:
+#        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#        query = f'SELECT * FROM weather' 
+#        data = pd.read_sql(query, engine)
+#        return data
+#    except Exception as e:
+#        st.error(f'Error: {e}')
 
-# Define a function to connect to the database
-def connect_to_database():
-    try:
-        connection = psycopg2.connect(
-            dbname="db_user",
-            user="db_password",
-            password="db_host",
-            host="db_name",
-            port="db_port"
-        )
-        return connection
-    except psycopg2.Error as e:
-        print("Unable to connect to the database.")
-        print(e)
-        return None
 
-# Define a function to fetch weather data from the database
-def fetch_weather_data(connection):
-    try:
-        cursor = connection.cursor()
-        cursor.execute("SELECT timestamp, temperature FROM weather_data ORDER BY timestamp")
-        weather_data = cursor.fetchall()
-        cursor.close()
-        return weather_data
-    except psycopg2.Error as e:
-        print("Error fetching weather data from the database.")
-        print(e)
-        return None
 
-# Define a function to organize weather data by day
-def organize_by_day(weather_data):
-    organized_data = {}
-    for timestamp, temperature in weather_data:
-        day = timestamp.date()
-        if day not in organized_data:
-            organized_data[day] = []
-        organized_data[day].append((timestamp, temperature))
-    return organized_data
+# Connect to the database and fetch data
+#weather_data = db_connect()
 
-# Define a function to plot weather data for each day
-def plot_weather_data(organized_data):
-    for day, data in organized_data.items():
-        timestamps, temperatures = zip(*data)
-        plt.figure(figsize=(10, 6))
-        plt.plot(timestamps, temperatures, marker='o', linestyle='-')
-        plt.title(f"Weather Changes on {day}")
-        plt.xlabel("Time")
-        plt.ylabel("Temperature (°C)")
-        plt.xticks(rotation=45)
-        plt.grid(True)
-        plt.tight_layout()
-        plt.show()
+# Display the fetched data
+#if weather_data is not None:
+#    st.write(weather_data)
+#else:
+#    st.error("Failed to get weather data.")
 
-# Define the main function to execute the script
-def main():
-    # Connect to the database
-    connection = connect_to_database()
-    if connection is not None:
-        # Fetch weather data
-        weather_data = fetch_weather_data(connection)
-        if weather_data is not None:
-            # Organize weather data by day
-            organized_data = organize_by_day(weather_data)
-            # Plot weather data for each day
-            plot_weather_data(organized_data)
-        # Close the database connection
-        connection.close()
-    else:
-        print("Exiting script.")
 
-# Execute the main function when the script is run
-if __name__ == "__main__":
-    main()
+
+# Fetch data from the database
+#def get_data():
+#    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+#    query = "SELECT * FROM weather"
+#    data = pd.read_sql(query, engine)
+#    return data
+
+def get_data():
+    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+    query = "SELECT DATE_TRUNC('day', date::timestamp AT TIME ZONE 'UTC') AS day, AVG(temperature) AS avg_temperature FROM weather GROUP BY day"
+    data = pd.read_sql(query, engine)
+    return data
+
+# Get aggregated weather data by day
+weather_data = get_data()
+
+# Display the fetched data
+if not weather_data.empty:
+    st.write(weather_data)
+else:
+    st.error("Failed to get weather data.")
+
+# Plot the trends
+st.line_chart(weather_data.set_index('day'))
