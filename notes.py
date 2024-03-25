@@ -133,7 +133,7 @@ latest_data = get_latest_data(selected_city)
 
 def plot_air_quality_comparison(latest_data):
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutants = ['CO', 'NO2', 'O3']
+    pollutants = ['co', 'no2', 'o3']
     
     # Check if 'location' column exists in the DataFrame
     if 'location' not in latest_data.columns:
