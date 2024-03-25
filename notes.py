@@ -83,17 +83,12 @@ db_port = st.secrets["DB_PORT"]
 def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
-            SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, temperature 
+            SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, temperature, co, no2, o3 
             FROM student.weather 
             WHERE location='{selected_city}' 
             ORDER BY date ASC
             """
-    query1 = f"""
-            SELECT location, co, no2, o3
-            FROM student.weather
-            WHERE location='{selected_city}' 
-            """    
-    data = pd.read_sql(query, query1, engine)
+    data = pd.read_sql(query, engine)
     return data
 
 
