@@ -129,6 +129,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Plot line plot with markers for temperature changes over time
+# Assuming the 'date' column in weather_data is not in datetime format
+weather_data['date'] = pd.to_datetime(weather_data['date'])
+
+# Plot line plot with markers for temperature changes over time
 if weather_data is not None:
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(weather_data['date'], weather_data['temperature'], marker='o', color='blue', linestyle='-', alpha=0.5)
@@ -141,5 +145,6 @@ if weather_data is not None:
     st.pyplot(fig)
 else:
     st.error("Failed to get weather data.")
+
 
 
