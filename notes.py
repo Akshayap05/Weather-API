@@ -29,8 +29,7 @@ def get_details(cities):
         CO = weather['current']['air_quality']['co']
         NO2= weather['current']['air_quality']['no2']
         Ozone= weather['current']['air_quality']['o3']
-        return temperature, latitude, longitude, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone
-        
+        return temperature, latitude, longitude, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone    
     except:
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
@@ -89,7 +88,12 @@ def get_data(selected_city):
             WHERE location='{selected_city}' 
             ORDER BY date ASC
             """
-    data = pd.read_sql(query, engine)
+    query1 = f"""
+            SELECT location, co, no2, o3
+            FROM student.weather
+            WHERE location='{selected_city}' 
+            """    
+    data = pd.read_sql(query, query1, engine)
     return data
 
 
@@ -112,6 +116,22 @@ def main():
 
     # Display the line plot in Streamlit
     st.pyplot(plt)
+
+    # Plot bar chart for each pollutant
+    st.subheader(f'Air Quality in {selected_city}')
+    fig, ax = plt.subplots(figsize=(10, 6))
+    data.plot(kind='bar', x='location', ax=ax)
+    plt.xlabel('Pollutant')
+    plt.ylabel('Concentration')
+    plt.title('Air Quality Comparison')
+    plt.xticks(rotation=0)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+
+    # Display the plot
+    st.pyplot(fig)
+
+    
 
 
 main()
