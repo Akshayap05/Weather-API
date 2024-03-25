@@ -105,36 +105,21 @@ db_port = st.secrets["DB_PORT"]
 #    st.error("Failed to get weather data.")
 
 
-def db_connect(selected_city):
-    try:
-        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-        query = f"SELECT date, temperature FROM weather WHERE location = '{selected_city}'"
-        data = pd.read_sql(query, engine)
-        return data
-    except Exception as e:
-        st.error(f'Error: {e}')
 
 # Fetch data from the database
-data = db_connect(selected_city)
+def get_data():
+    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+    query = "SELECT * FROM weather"
+    data = pd.read_sql(query, engine)
+    return data
 
-# Ensure that the data DataFrame contains the necessary columns (date and temperature)
-# Convert 'date' column to datetime format
-data['date'] = pd.to_datetime(data['date'])
+def main():
+    st.title('Weather Data from PostgreSQL Database')
+    data = get_data()
+    if not data.empty:
+        st.write("Latest Weather Data:")
+        st.write(data)
+    else:
+        st.error("No data available.")
 
-# Plot scatter plot with markers for temperature changes over time
-if data is not None:
-    fig, ax = plt.subplots()
-    ax.scatter(data['date'], data['temperature'])
-    ax.plot(data['date'], data['temperature'], linestyle='-', color='blue')  # Connect scatter points
-    ax.set_title(f'Temperature changes in {selected_city} over time')
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Temperature')
-    ax.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    st.pyplot(fig)
-else:
-    st.error("Failed to get weather data from the database.")
-
-
-
+main()
