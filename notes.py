@@ -19,6 +19,8 @@ def get_details(cities):
         response = requests.get(url)
         weather = response.json()
         temperature = weather['current']['temp_c']
+        latitude = weather['location']['lat']
+        longitude = weather['location']['lon']
         condition = weather['current']['condition']['text']
         icon = weather['current']['condition']['icon']
         humidity = weather['current']['humidity']
@@ -27,15 +29,15 @@ def get_details(cities):
         CO = weather['current']['air_quality']['co']
         NO2= weather['current']['air_quality']['no2']
         Ozone= weather['current']['air_quality']['o3']
-        return temperature, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone
+        return temperature, latitude, longitude, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone
         
     except:
-        return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
+        return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.selectbox('Select a city', cities)
 
-weather_data = temperature, condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
+weather_data = temperature, latitude, longitude ,condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
 tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
@@ -167,21 +169,21 @@ st.pyplot(plt)
 import folium
 from folium.plugins import HeatMap
 
-# Plot the heatmap
-if not data.empty:
-    # Create a Folium map centered around the UK
-    m = folium.Map(location=[54.5260, -3.3086], zoom_start=6)
+def main():
+    temperature_data = data(selected_city)
+    latitude, longitude = data(selected_city)
+    st.write("Map with temperature data:")
+    m = folium.Map(location=[latitude, longitude], zoom_start=10)
 
-    # Convert temperature data to heatmap format
-    heatmap_data = [(row['latitude'], row['longitude'], row['temperature']) for index, row in data.iterrows()]
-
-    # Add heatmap layer to the map
-    HeatMap(heatmap_data).add_to(m)
+    # Add temperature data as markers
+    for index, row in temperature_data.iterrows():
+        folium.Marker([row['latitude'], row['longitude']], popup=f"Temperature: {row['temperature']}°C").add_to(m)
 
     # Display the map
-    st.write(m)
-else:
-    st.error("Failed to get data from the database.")
+    folium_static(m)
+
+if __name__ == "__main__":
+    main()
 
 
     
