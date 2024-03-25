@@ -121,7 +121,7 @@ def main():
         st.write("Latest Weather Data:")
         st.write(data)
         # Convert date column to datetime format
-        data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d %H:%M:%S')
+        data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d %H:%M')
         # Plot temperature changes over time
         fig, ax = plt.subplots()
         ax.plot(data['date'], data['temperature'], marker='o')
