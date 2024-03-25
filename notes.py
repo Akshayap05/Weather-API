@@ -43,7 +43,7 @@ tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 # Position the informaiton and the image on page:
 
-left_col, right_col, right_hand_col = st.columns([15, 2, 6])
+left_col, right_col, right_hand_col = st.columns([15, 4, 8])
 
 if tab == "Weather":
     with left_col:
@@ -115,7 +115,6 @@ main()
 
 # Plot bar chart for each pollutant
 if tab =='Air Quality':
-    st.subheader(f'{selected_city}')
     fig, ax = plt.subplots(figsize=(10, 6))
     data.plot(kind='bar', x='location', ax=ax)
     plt.xlabel('Pollutant')
