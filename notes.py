@@ -54,6 +54,7 @@ if tab == "Weather":
     st.write(f"Cloud Cover: {Cloud_cover}%")
    
 elif tab == "Air Quality":
+    st.title(f"{selected_city}")
     st.write(f"UV Index: {UV_index}")
     st.write(f"CO: {CO}")
     st.write(f"NO2: {NO2}")
