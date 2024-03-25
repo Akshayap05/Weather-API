@@ -52,8 +52,8 @@ if tab == "Weather":
     st.write(f"Condition: {condition}")
     st.write(f"Humidity: {humidity}%")
     st.write(f"Cloud Cover: {Cloud_cover}%")
-elif tab == "Air Quality"
-
+   
+elif tab == "Air Quality":
     st.write(f"UV Index: {UV_index}")
     st.write(f"CO: {CO}")
     st.write(f"NO2: {NO2}")
