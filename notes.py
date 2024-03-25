@@ -43,22 +43,27 @@ tab1, tab2 = st.tabs([" Weather", "Air Quality"])
 
 left_col,  right_col, right_hand_col = st.columns([10,6, 4])
 
-with left_col:
 
-    if tab1 == 'Weather':
+
+if tab1:
+
+    if weather_data:
         st.title(f"{selected_city}")
         st.write(f"Temperature: {temperature}°C")
         st.write(f"Condition: {condition}")
         st.write(f"Humidity: {humidity}%")
         st.write(f"Cloud Cover: {Cloud_cover}%")
-    elif tab2 == 'Air Quality':
-        st.write(f"UV Index: {UV_index}")
-        st.write(f"CO: {CO}")
-        st.write(f"NO2: {NO2}")
-        st.write(F"Ozone (O3): {Ozone}")
     else:
         st.error('Failed to get data')
 
+elif tab2:
+    if weather_data:
+            st.write(f"UV Index: {UV_index}")
+            st.write(f"CO: {CO}")
+            st.write(f"NO2: {NO2}")
+            st.write(F"Ozone (O3): {Ozone}")
+    else:
+            st.error("Failed to get data.")
 
 with right_col:
 
