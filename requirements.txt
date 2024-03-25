@@ -7,5 +7,5 @@ psycopg2-binary
 numpy
 sqlalchemy
 seaborn
-folium.plugins
+folium
 HeatMap
