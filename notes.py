@@ -135,4 +135,4 @@ weather_data['date'] = pd.to_datetime(weather_data['date']).dt.date
 daily_average_temp = weather_data.groupby('date')['temperature'].mean()
 
 # Plot the line chart
-st.line_chart(daily_average_temp.set_index('date'))
+st.line_chart(daily_average_temp)
