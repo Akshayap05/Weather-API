@@ -118,21 +118,22 @@ import datetime
 # Fetch data from the database
 def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    end_date = datetime.datetime.now().date()  # Get today's date
+    #end_date = datetime.datetime.now().date()  # Get today's date
     # Calculate the start date (Yesterday)
-    start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
-    query = f"SELECT date::timestamp AT TIME ZONE 'UTC' AS date, temperature FROM weather WHERE city='{selected_city}' AND date::date BETWEEN '{start_date}' AND '{end_date}'"
+    #start_date = end_date - datetime.timedelta(days=7)  # for the last 7 days
+    query = f"SELECT DISTINCT(date::date) AS date, location,temperature FROM student.weather WHERE location='{selected_city}' ORDER BY date ASC;'"
     data = pd.read_sql(query, engine)
     return data
 
+
 # Fetch data from the database
-weather_data = get_data(selected_city)
+data = get_data(selected_city)
 
 # Convert the 'date' column to datetime format
-weather_data['date'] = pd.to_datetime(weather_data['date']).dt.date
+#data['date'] = pd.to_datetime(weather_data['date']).dt.date
 
 # Group by date and calculate the average temperature for each day
-daily_average_temp = weather_data.groupby('date')['temperature'].mean()
+daily_average_temp = data.groupby('date')['temperature'].mean()
 
 # Plot the line chart
 st.line_chart(daily_average_temp)
