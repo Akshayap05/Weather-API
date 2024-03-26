@@ -1,13 +1,11 @@
 import streamlit as st
-from streamlit_folium import folium_static
 from sqlalchemy import create_engine
 import requests
 import numpy as np
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
-import folium
-from folium.plugins import HeatMap
+
 
 st.set_page_config(page_title="Welcome to our Weather App", page_icon="🌎")
 st.title('Welcome to our Weather App')
@@ -38,7 +36,7 @@ def get_details(cities):
 # All the cities 
     
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
-selected_city = st.selectbox('Choose a city', cities)
+selected_city = st.sidebar.selectbox('Choose a city', cities)
 
 weather_data = temperature, latitude, longitude ,condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
