@@ -146,18 +146,7 @@ def main():
 
         st.pyplot(plt)
     # Plot the air quality data (pollution) for all cities to compare with eachother
-        if st.button('See all cities'):
-        
-            fig, ax = plt.subplots(figsize=(10, 6))
-            pollution_data_cities.plot(kind='bar', x='location', ax=ax)
-            plt.xlabel('City')
-            plt.ylabel('Average Concentration')
-            plt.title('Pollutant Comparison for All Cities')
-            plt.xticks(rotation=45)
-            plt.legend(loc='upper right')
-            plt.tight_layout()
 
-        st.pyplot(fig)
     # Plot the air quality data (pollution) for city selected:
     elif tab =='Air Quality':
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -170,6 +159,19 @@ def main():
         plt.tight_layout()
 
         st.pyplot(fig)
+
+        if st.button('See all cities'):
+        
+            fig, ax = plt.subplots(figsize=(10, 6))
+            pollution_data_cities.plot(kind='bar', x='location', ax=ax)
+            plt.xlabel('City')
+            plt.ylabel('Average Concentration')
+            plt.title('Pollutant Comparison for All Cities')
+            plt.xticks(rotation=45)
+            plt.legend(loc='upper right')
+            plt.tight_layout()
+
+            st.pyplot(fig) 
     else:
         st.error("Failed to get data.")
 
