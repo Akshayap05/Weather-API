@@ -40,7 +40,7 @@ def get_details(cities):
 
 # Sidebar: Logo and Select box.
 
-st.sidebar.image('logo.png', width = 100)
+st.sidebar.image('logo.png', width = 150)
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
