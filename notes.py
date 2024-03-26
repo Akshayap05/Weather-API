@@ -162,10 +162,6 @@ def get_pollutant_data_for_cities(cities):
 # Multiselect widget to select cities
 city_comparisons = st.multiselect('Select cities to compare with London', selected_city)
 
-# Add London to the selected cities if it's not already selected
-if 'London' not in city_comparisons:
-    city_comparisons.append('London')
-
 # Fetch the pollutant data for selected cities
 pollutant_data_cities = get_pollutant_data_for_cities(city_comparisons)
 
