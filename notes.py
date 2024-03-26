@@ -128,7 +128,8 @@ def pollutant_data(selected_city):
 pollutant_dat = pollutant_data(selected_city)
 
 # Display the pollutant data for the selected city
-if not pollutant_dat.empty:
+
+if tab =='Air Quality':
     fig, ax = plt.subplots(figsize=(8, 6))
     pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
     plt.xlabel('Pollutant')
@@ -140,8 +141,7 @@ if not pollutant_dat.empty:
 
     # Display the plot
     st.pyplot(fig)
-else:
-    st.write(f"No data available for {selected_city}.")
+
 
 
 
