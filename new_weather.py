@@ -61,7 +61,7 @@ if tab == "Weather":
         st.write(f"Cloud Cover: {Cloud_cover}%")
 elif tab == "Air Quality":
     with left_col:
-        st.markdown(f"<h3>{selected_city}'s Air Quality Today:</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2.5>{selected_city}'s Air Quality Today:</h2.5>", unsafe_allow_html=True)
         st.write(f"UV Index: {UV_index}")
         st.write(f"CO: {CO}")
         st.write(f"NO2: {NO2}")
