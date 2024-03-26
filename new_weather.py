@@ -111,9 +111,9 @@ def get_data(selected_city):
     air_quality_all_cities = pd.read_sql(query3, engine)
     return data,air_quality,air_quality_all_cities
 
-data = get_data(selected_city)
-air_quality = get_data(selected_city)
-air_quality_all_cities = get_data()
+#data = get_data(selected_city)
+#air_quality = get_data(selected_city)
+#air_quality_all_cities = get_data()
 
 # Graphs:
 
@@ -158,5 +158,7 @@ def main():
         st.pyplot(fig)
     else:
         st.error("Failed to get data.")
+
+data, air_quality, air_quality_all_cities = get_data(selected_city)
 
 main()
