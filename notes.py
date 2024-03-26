@@ -113,34 +113,6 @@ def main():
         st.pyplot(plt)
 main()
 
-# Retrieve latest data for all cities
-def get_pollutant_data_for_all_cities():
-    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = """
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            GROUP BY location
-            """
-    pollutant_data_all_cities = pd.read_sql(query, engine)
-    return pollutant_data_all_cities
-
-# Fetch the pollutant data for all cities
-pollutant_data_all_cities = get_pollutant_data_for_all_cities()
-
-# Plot the pollutants for all cities
-fig, ax = plt.subplots(figsize=(10, 6))
-pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
-plt.xlabel('City')
-plt.ylabel('Average Concentration')
-plt.title('Pollutant Comparison for All Cities')
-plt.xticks(rotation=45)
-plt.legend(loc='upper right')
-plt.tight_layout()
-
-# Display the plot
-st.pyplot(fig)
-
-
 def pollutant_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
@@ -170,6 +142,40 @@ if not pollutant_dat.empty:
     st.pyplot(fig)
 else:
     st.write(f"No data available for {selected_city}.")
+
+
+
+# Retrieve latest data for all cities
+def get_pollutant_data_for_all_cities():
+    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+    query = """
+            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+            FROM student.weather
+            GROUP BY location
+            """
+    pollutant_data_all_cities = pd.read_sql(query, engine)
+    return pollutant_data_all_cities
+
+# Fetch the pollutant data for all cities
+pollutant_data_all_cities = get_pollutant_data_for_all_cities()
+
+if not get_pollutant_data_for_all_cities.empty:
+    fig, ax = plt.subplots(figsize=(10, 6))
+    pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
+    plt.xlabel('City')
+    plt.ylabel('Average Concentration')
+    plt.title('Pollutant Comparison for All Cities')
+    plt.xticks(rotation=45)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+
+    # Display the plot
+    st.pyplot(fig)
+else:
+    st.error('Error getting data')
+
+
+
 
 
 
