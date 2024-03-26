@@ -112,8 +112,6 @@ def get_data(selected_city):
         st.error(f'Error: {e}')
 
 
-#data = get_data(selected_city)
-#air_quality = get_data(selected_city)
 
 # Query to get air quality (pollution data):
    
@@ -134,7 +132,6 @@ def get_pollution_data_for_all_cities():
 
 
 # Graphs:
-
 
 def main():
     data, air_quality = get_data(selected_city)
@@ -160,7 +157,7 @@ def main():
         air_quality.set_index('date').plot(kind='bar', ax=ax)
         plt.xlabel('Date')
         plt.ylabel('Average Concentration')
-        plt.title(f'Pollutant Concentration in {selected_city}')
+        plt.title(f'Amount of Pollutant over time in {selected_city}')
         plt.xticks(rotation=0)
         plt.legend(loc='upper right')
         plt.tight_layout()
