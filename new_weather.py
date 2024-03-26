@@ -87,29 +87,34 @@ db_port = st.secrets["DB_PORT"]
 # Connect to database, get weather details through table using query:
 
 def get_data(selected_city):
+    try:
 
-    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query1 = f"""
-            SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, temperature, co, no2, o3
-            FROM student.weather
-            WHERE location='{selected_city}'
-            ORDER BY date ASC"""
-    data = pd.read_sql(query1, engine)
+        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+        query1 = f"""
+                SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, temperature, co, no2, o3
+                FROM student.weather
+                WHERE location='{selected_city}'
+                ORDER BY date ASC"""
+        data = pd.read_sql(query1, engine)
 
-    query2 = f"""
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            WHERE location = '{selected_city}'
-            GROUP BY location""" 
-    air_quality = pd.read_sql(query2, engine)
+        query2 = f"""
+                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+                FROM student.weather
+                WHERE location = '{selected_city}'
+                GROUP BY location""" 
+        air_quality = pd.read_sql(query2, engine)
 
-    query3 = """
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            GROUP BY location
-            """
-    air_quality_all_cities = pd.read_sql(query3, engine)
-    return data,air_quality,air_quality_all_cities
+        query3 = """
+                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+                FROM student.weather
+                GROUP BY location
+                """
+        air_quality_all_cities = pd.read_sql(query3, engine)
+        return data,air_quality,air_quality_all_cities
+    except Exception as e:
+        st.error(f'Error: {e}')
+
+
 
 #data = get_data(selected_city)
 #air_quality = get_data(selected_city)
