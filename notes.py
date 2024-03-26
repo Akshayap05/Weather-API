@@ -141,43 +141,26 @@ plt.tight_layout()
 st.pyplot(fig)
 
 
-
-
-import streamlit as st
-
-# Create a multiselect widget to select cities
-# Function to fetch pollutant data for selected cities
 def pollutant_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+            SELECT location, co, no2, o3
             FROM student.weather
-            WHERE location IN {selected_city}
-            GROUP BY location
+            WHERE location = '{selected_city}'
             """
-    pollutant_data = pd.read_sql(query, engine)
-    return pollutant_data
+    pollutant_data_city = pd.read_sql(query, engine)
+    return pollutant_data_city
 
 
-# Fetch the pollutant data for selected cities
-pollutant_data_cities = pollutant_data(selected_city)
+# Fetch the pollutant data for the selected city
+pollutant_data_city = pollutant_data(selected_city)
 
-# Plot the pollutants for selected cities
-if not pollutant_data.empty:
-    fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_data_cities.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('City')
-    plt.ylabel('Average Concentration')
-    plt.title('Pollutant Comparison for Selected Cities')
-    plt.xticks(rotation=45)
-    plt.legend(loc='upper right')
-    plt.tight_layout()
-
-    # Display the plot
-    st.pyplot(fig)
+# Display the pollutant data for the selected city
+if not pollutant_data_city.empty:
+    st.write(f"Pollutant data for {selected_city}:")
+    st.write(pollutant_data_city)
 else:
-    st.write("No data available for the selected cities.")
-
+    st.write(f"No data available for {selected_city}.")
 
 
 
