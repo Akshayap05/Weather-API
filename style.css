@@ -1,9 +1,5 @@
-[data-testid=metric-container] {
-    box-shadow: 0 0 4px #686664;
-    padding: 10px;
-}
 
-.sidebar-content {
+st.sidebar {
     color: rgb(64, 62, 137);
 }
 
