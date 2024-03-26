@@ -158,9 +158,11 @@ def get_pollutant_data_for_cities(cities):
     return pollutant_data_cities
 
 # Define cities list (you should define this list earlier in your code)
+cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester', 'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 
 # Multiselect widget to select cities
-city_comparisons = st.multiselect('Select cities to compare with London', selected_city)
+selected_city = 'London'  # You need to define the default value for selected_city
+city_comparisons = st.multiselect('Select cities to compare with London', cities, default=[selected_city])
 
 # Fetch the pollutant data for selected cities
 pollutant_data_cities = get_pollutant_data_for_cities(city_comparisons)
@@ -180,7 +182,6 @@ if not pollutant_data_cities.empty:
     st.pyplot(fig)
 else:
     st.write("No data available for the selected cities.")
-
 
 
 
