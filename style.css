@@ -1,9 +1,0 @@
-
-st.sidebar {
-    color: rgb(7, 3, 133);
-}
-
-[data-testid=stSidebar] {
-    color: white;
-     
-}
