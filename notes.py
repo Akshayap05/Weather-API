@@ -148,19 +148,19 @@ def pollutant_data(selected_city):
             FROM student.weather
             WHERE location = '{selected_city}'
             """
-    pollutant_data_city = pd.read_sql(query, engine)
-    return pollutant_data_city
+    pollutant_dat = pd.read_sql(query, engine)
+    return pollutant_dat
 
 
 # Fetch the pollutant data for the selected city
-pollutant_data_city = pollutant_data(selected_city)
+pollutant_dat = pollutant_data(selected_city)
 
 # Display the pollutant data for the selected city
-if not pollutant_data_city.empty:
+if not pollutant_dat.empty:
 
     # Plot the pollutant data as a bar plot
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_data_city.set_index('location').plot(kind='bar', ax=ax)
+    pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
     plt.xlabel('Pollutant')
     plt.ylabel('Concentration')
     plt.title(f'Pollutant Concentration in {selected_city}')
