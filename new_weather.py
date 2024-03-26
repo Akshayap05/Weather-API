@@ -104,21 +104,28 @@ def get_data(selected_city):
                 GROUP BY location""" 
         air_quality = pd.read_sql(query2, engine)
 
-        query3 = """
-                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-                FROM student.weather
-                GROUP BY location
-                """
-        air_quality_all_cities = pd.read_sql(query3, engine)
-        return data,air_quality,air_quality_all_cities
+        return data,air_quality
     except Exception as e:
         st.error(f'Error: {e}')
 
 
+data = get_data(selected_city)
+air_quality = get_data(selected_city)
 
-#data = get_data(selected_city)
-#air_quality = get_data(selected_city)
-#air_quality_all_cities = get_data()
+# Query to get air quality (pollution data):
+    
+def get_pollution_data_for_all_cities():
+    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+    query3 = """
+            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+            FROM student.weather
+            GROUP BY location
+            """
+    pollution_data_cities = pd.read_sql(query3, engine)
+    return pollution_data_cities
+
+    # Fetch the pollutant data for all cities
+pollution_data_cities = get_pollution_data_for_all_cities()
 
 # Graphs:
 
@@ -140,7 +147,7 @@ def main():
         if st.button('See all cities'):
         
             fig, ax = plt.subplots(figsize=(10, 6))
-            air_quality_all_cities.plot(kind='bar', x='location', ax=ax)
+            pollution_data_cities.plot(kind='bar', x='location', ax=ax)
             plt.xlabel('City')
             plt.ylabel('Average Concentration')
             plt.title('Pollutant Comparison for All Cities')
@@ -164,6 +171,6 @@ def main():
     else:
         st.error("Failed to get data.")
 
-data, air_quality, air_quality_all_cities = get_data(selected_city)
+#data, air_quality, air_quality_all_cities = get_data(selected_city)
 
 main()
