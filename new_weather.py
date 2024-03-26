@@ -157,7 +157,7 @@ def main():
         air_quality.set_index('date').plot(kind='bar', ax=ax)
         plt.xlabel('Date')
         plt.ylabel('Average Concentration')
-        plt.title(f'Amount of Pollutant over time in {selected_city}')
+        plt.title(f'Change in Pollution levels over time in {selected_city}')
         plt.xticks(rotation=0)
         plt.legend(loc='upper right')
         plt.tight_layout()
