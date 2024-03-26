@@ -87,7 +87,7 @@ db_port = st.secrets["DB_PORT"]
 
 # Connect to database, get weather details through table using query:
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def get_data(selected_city):
     db_user = st.secrets["DB_USER"]
     db_password = st.secrets["DB_PASSWORD"]
@@ -120,28 +120,30 @@ def get_data(selected_city):
 #air_quality = get_data(selected_city)
 
 # Query to get air quality (pollution data):
-@st.cache    
+@st.cache(allow_output_mutation=True)    
 def get_pollution_data_for_all_cities():
     db_user = st.secrets["DB_USER"]
     db_password = st.secrets["DB_PASSWORD"]
     db_host = st.secrets["DB_HOSTS"]
     db_name = st.secrets["DB_NAME"]
     db_port = st.secrets["DB_PORT"]
-    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query3 = """
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            GROUP BY location
-            """
-    pollution_data_cities = pd.read_sql(query3, engine)
-    return pollution_data_cities
+    try:
+        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+        query3 = f"""
+                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+                FROM student.weather
+                GROUP BY location
+                """
+        pollution_data_cities = pd.read_sql(query3, engine)
+        return pollution_data_cities
+    except Exception as e:
+        st.error(f'Error: {e}')
 
-    # Fetch the pollutant data for all cities
-#pollution_data_cities = get_pollution_data_for_all_cities()
+
 
 # Graphs:
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def main():
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
