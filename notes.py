@@ -159,19 +159,19 @@ def get_pollutant_data_for_all_cities():
     # Fetch the pollutant data for all cities
 pollutant_data_all_cities = get_pollutant_data_for_all_cities()
 
-if tab == 'Air Quality':
-    with st.button('See all cities'):
-# Plot the air quality data (pollution) for all cities to compare with eachother    
-        fig, ax = plt.subplots(figsize=(10, 6))
-        pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
-        plt.xlabel('City')
-        plt.ylabel('Average Concentration')
-        plt.title('Pollutant Comparison for All Cities')
-        plt.xticks(rotation=45)
-        plt.legend(loc='upper right')
-        plt.tight_layout()
 
-        st.pyplot(fig)
+if st.button('See all cities'):
+# Plot the air quality data (pollution) for all cities to compare with eachother    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
+    plt.xlabel('City')
+    plt.ylabel('Average Concentration')
+    plt.title('Pollutant Comparison for All Cities')
+    plt.xticks(rotation=45)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+
+    st.pyplot(fig)
 
 
 
