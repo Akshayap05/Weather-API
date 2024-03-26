@@ -208,7 +208,7 @@ def graphs():
      )
     left,right,center=st.columns(3)
     left.plotly_chart(fig_state,use_container_width=True)
-    right.plotly_chart(pollution,use_container_width=True)
+    right.plotly_chart(fig_investment,use_container_width=True)
 
 
     
