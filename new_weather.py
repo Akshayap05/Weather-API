@@ -113,7 +113,7 @@ def get_data(selected_city):
 
 data = get_data(selected_city)
 air_quality = get_data(selected_city)
-air_quality_all_cities = get_data(selected_city)
+air_quality_all_cities = get_data()
 
 # Graphs:
 
