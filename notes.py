@@ -144,7 +144,7 @@ st.pyplot(fig)
 def pollutant_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
-            SELECT location, co, no2, o3
+            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
             FROM student.weather
             WHERE location = '{selected_city}'
             """
