@@ -104,7 +104,8 @@ def get_data(selected_city):
                 SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
                 FROM student.weather
                 WHERE location = '{selected_city}'
-                GROUP BY date, location""" 
+                GROUP BY date, location
+                ORDER BY date ASC""" 
         air_quality = pd.read_sql(query2, engine)
 
         return data,air_quality
