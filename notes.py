@@ -186,8 +186,26 @@ if st.button('See all cities'):
     st.pyplot(fig)
 
 
+import plotly.express as px
 
 
+#simple line graph investment by state
+def graphs():
+    pollution=data.groupby(by=["location", "date"]).mean()[["temperature"]]
+    fig_state=px.line(
+       pollution,
+       x=pollution.index,
+       y="Temperature",
+       orientation="v",
+       title="<b> INVESTMENT BY STATE </b>",
+       color_discrete_sequence=["#0083b8"]*len(pollution),
+       template="plotly_white",
+    )
+    fig_state.update_layout(
+    xaxis=dict(tickmode="linear"),
+    plot_bgcolor="rgba(0,0,0,0)",
+    yaxis=(dict(showgrid=False))
+     )
 
 
     
