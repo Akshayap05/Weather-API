@@ -15,7 +15,7 @@ st.write("**Select a city from the dropdown box to explore its weather.**")
 
 # Get weather data from API for different cities:
 
-@st.cache
+
 def get_details(cities):
     
     try:
@@ -87,7 +87,7 @@ db_port = st.secrets["DB_PORT"]
 
 # Connect to database, get weather details through table using query:
 
-@st.cache(allow_output_mutation=True)
+
 def get_data(selected_city):
     db_user = st.secrets["DB_USER"]
     db_password = st.secrets["DB_PASSWORD"]
@@ -120,7 +120,7 @@ def get_data(selected_city):
 #air_quality = get_data(selected_city)
 
 # Query to get air quality (pollution data):
-@st.cache(allow_output_mutation=True)    
+   
 def get_pollution_data_for_all_cities():
     db_user = st.secrets["DB_USER"]
     db_password = st.secrets["DB_PASSWORD"]
@@ -143,7 +143,7 @@ def get_pollution_data_for_all_cities():
 
 # Graphs:
 
-@st.cache(allow_output_mutation=True)
+
 def main():
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
