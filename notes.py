@@ -11,6 +11,9 @@ st.set_page_config(page_title="Welcome to our Weather App", page_icon="🌎")
 st.title('Welcome to our Weather App')
 st.write("**Select a city from the dropdown box to explore its weather.**")
 
+with open('style.css')as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html = True)
+
 # Get weather data from API and different cities:
 
 def get_details(cities):
@@ -37,7 +40,6 @@ def get_details(cities):
     
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 
-#st.sidebar.image('logo.png', width=100, use_column_width=False, output_format='PNG', style="display: block; margin: 0 auto;")
 st.sidebar.image('logo.png', width = 100)
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 
