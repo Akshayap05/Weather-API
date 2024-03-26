@@ -50,7 +50,7 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 # Add and position text to homepage using left column:
 
-left_col, right_col, right_hand_col = st.columns([15, 2, 8])
+left_col, right_col, right_hand_col = st.columns([15, 2, 7])
 
 if tab == "Weather":
     with left_col:
