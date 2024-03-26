@@ -37,7 +37,7 @@ def get_details(cities):
     
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 
-st.sidebar.image('C:/Users/aksha/OneDrive/Pictures/logo.png')
+st.sidebar.image('logo.png')
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 
 
