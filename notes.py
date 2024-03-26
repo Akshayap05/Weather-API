@@ -144,28 +144,30 @@ st.pyplot(fig)
 def pollutant_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            WHERE location = '{selected_city}'
+            SELECT 'CO' AS pollutant, AVG(co) AS concentration FROM student.weather WHERE location = '{selected_city}'
+            UNION ALL
+            SELECT 'NO2' AS pollutant, AVG(no2) AS concentration FROM student.weather WHERE location = '{selected_city}'
+            UNION ALL
+            SELECT 'O3' AS pollutant, AVG(o3) AS concentration FROM student.weather WHERE location = '{selected_city}'
             """
-    pollutant_dat = pd.read_sql(query, engine)
-    return pollutant_dat
+    pollutant_data = pd.read_sql(query, engine)
+    return pollutant_data
 
+# Select a city
+selected_city = st.selectbox('Select a city', cities)
 
 # Fetch the pollutant data for the selected city
 pollutant_dat = pollutant_data(selected_city)
 
 # Display the pollutant data for the selected city
 if not pollutant_dat.empty:
-
     # Plot the pollutant data as a bar plot
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
+    ax.bar(pollutant_dat['pollutant'], pollutant_dat['concentration'])
     plt.xlabel('Pollutant')
     plt.ylabel('Concentration')
     plt.title(f'Pollutant Concentration in {selected_city}')
     plt.xticks(rotation=0)
-    plt.legend(loc='upper right')
     plt.tight_layout()
 
     # Display the plot
