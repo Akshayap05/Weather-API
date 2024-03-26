@@ -2,3 +2,12 @@
     box-shadow: 0 0 4px #686664;
     padding: 10px;
 }
+
+.sidebar-content {
+    color: white;
+}
+
+[data-testid=stSidebar] {
+    color: white;
+     
+}
