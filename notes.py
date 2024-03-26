@@ -158,11 +158,11 @@ pollutant_dat = pollutant_data(selected_city)
 # Display the pollutant data for the selected city
 if not pollutant_dat.empty:
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('City')
+    pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
+    plt.xlabel('Pollutant')
     plt.ylabel('Average Concentration')
-    plt.title('Pollutant Comparison for All Cities')
-    plt.xticks(rotation=45)
+    plt.title(f'Pollutant Concentration in {selected_city}')
+    plt.xticks(rotation=0)
     plt.legend(loc='upper right')
     plt.tight_layout()
 
@@ -170,7 +170,6 @@ if not pollutant_dat.empty:
     st.pyplot(fig)
 else:
     st.write(f"No data available for {selected_city}.")
-
 
 
 
