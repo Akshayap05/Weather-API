@@ -15,6 +15,7 @@ st.write("**Select a city from the dropdown box to explore its weather.**")
 
 # Get weather data from API for different cities:
 
+@st.cache
 def get_details(cities):
     
     try:
@@ -86,7 +87,13 @@ db_port = st.secrets["DB_PORT"]
 
 # Connect to database, get weather details through table using query:
 
+@st.cache
 def get_data(selected_city):
+    db_user = st.secrets["DB_USER"]
+    db_password = st.secrets["DB_PASSWORD"]
+    db_host = st.secrets["DB_HOSTS"]
+    db_name = st.secrets["DB_NAME"]
+    db_port = st.secrets["DB_PORT"]
     try:
 
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -113,8 +120,13 @@ def get_data(selected_city):
 #air_quality = get_data(selected_city)
 
 # Query to get air quality (pollution data):
-    
+@st.cache    
 def get_pollution_data_for_all_cities():
+    db_user = st.secrets["DB_USER"]
+    db_password = st.secrets["DB_PASSWORD"]
+    db_host = st.secrets["DB_HOSTS"]
+    db_name = st.secrets["DB_NAME"]
+    db_port = st.secrets["DB_PORT"]
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query3 = """
             SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
@@ -129,6 +141,7 @@ def get_pollution_data_for_all_cities():
 
 # Graphs:
 
+@st.cache
 def main():
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
