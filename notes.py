@@ -183,7 +183,7 @@ if not pollutant_data_cities.empty:
     # Display the plot
     st.pyplot(fig)
 else:
-    st.write("No data available for the selected cities."))
+    st.write("No data available for the selected cities.")
 
 
 
