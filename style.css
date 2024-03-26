@@ -4,7 +4,7 @@
 }
 
 .sidebar-content {
-    color: white;
+    color: rgb(64, 62, 137);
 }
 
 [data-testid=stSidebar] {
