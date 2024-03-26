@@ -13,6 +13,7 @@ st.set_page_config(page_title="Welcome to our Weather App", page_icon="🌎")
 st.title('Welcome to our Weather App')
 st.write("**Select a city from the dropdown box to explore its weather.**")
 
+# Get weather data from API and different cities:
 
 def get_details(cities):
     try:
@@ -34,6 +35,8 @@ def get_details(cities):
     except:
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
+# All the cities 
+    
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.selectbox('Choose a city', cities)
 
@@ -42,7 +45,7 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 tab = st.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 
-# Position the informaiton and the image on page:
+# Position the informaiton and image on the page:
 
 left_col, right_col, right_hand_col = st.columns([15, 2, 8])
 
@@ -63,15 +66,17 @@ elif tab == "Air Quality":
 else:
     st.error("Failed to get data.")
 
-# Display weather condition icon in the right column
+# Display weather condition icon in the right column:
+    
 with right_hand_col:
     if weather_data:
         icon_url = "https:" + icon
         st.image(icon_url, caption='Weather Condition', use_column_width=True)
 
 
-#connect to db:
-# Fetch database credentials from secrets
+# Connect to db:
+# Get database security and authorisation information from secrets.toml:
+        
 db_user = st.secrets["DB_USER"]
 db_password = st.secrets["DB_PASSWORD"]
 db_host = st.secrets["DB_HOSTS"]
@@ -79,7 +84,7 @@ db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
 
-# Retrieve data from the database
+# Connect to Database and retrieve data from weather table using query:
 
 def get_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -92,13 +97,15 @@ def get_data(selected_city):
     data = pd.read_sql(query, engine)
     return data
 
-# Fetch weather data from the database
+# Get weather data from the database for all cities in selected_city
+
 data = get_data(selected_city)
 
-# Fetch data from the database
+# Plot average temperature of each day as a line graph:
+
 def main():
     if tab =='Weather':
-    # Calculate average temperature of each day in the date
+    # Calculating average temperature:
         daily_average_temp = data.groupby('date')['temperature'].mean()
 
     # Plot the line chart using Matplotlib
@@ -110,11 +117,13 @@ def main():
         plt.xticks(rotation=45)
         plt.tight_layout()
 
-    # Display the line plot in Streamlit
+    # Display the line plot in Streamlit:
         st.pyplot(plt)
 main()
 
-def pollutant_data(selected_city):
+# Plot bar graph of air quality data (co,no2, o3):
+
+def air_quality(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = f"""
             SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
@@ -122,17 +131,18 @@ def pollutant_data(selected_city):
             WHERE location = '{selected_city}'
             GROUP BY location
             """
-    pollutant_data = pd.read_sql(query, engine)
-    return pollutant_data
+    air_quality = pd.read_sql(query, engine)
+    return air_quality
 
-# Fetch the pollutant data for the selected city
-pollutant_dat = pollutant_data(selected_city)
+# Get air quality data for the selected city:
 
-# Display the pollutant data for the selected city
+pollution_dat = air_quality(selected_city)
+
+# Display the air quality data for the selected city
 
 if tab =='Air Quality':
     fig, ax = plt.subplots(figsize=(8, 6))
-    pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
+    pollution_dat.set_index('location').plot(kind='bar', ax=ax)
     plt.xlabel('Pollutant')
     plt.ylabel('Average Concentration')
     plt.title(f'Pollutant Concentration in {selected_city}')
@@ -140,31 +150,30 @@ if tab =='Air Quality':
     plt.legend(loc='upper right')
     plt.tight_layout()
 
-    # Display the plot
     st.pyplot(fig)
 
+# To make comparison bar graph:
 
-
-
-# Retrieve latest data for all cities
-def get_pollutant_data_for_all_cities():
+# Query to get air quality (pollution data):
+    
+def get_pollution_data_for_all_cities():
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
     query = """
             SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
             FROM student.weather
             GROUP BY location
             """
-    pollutant_data_all_cities = pd.read_sql(query, engine)
-    return pollutant_data_all_cities
+    pollution_data_cities = pd.read_sql(query, engine)
+    return pollution_data_cities
 
     # Fetch the pollutant data for all cities
-pollutant_data_all_cities = get_pollutant_data_for_all_cities()
+pollution_data_cities = get_pollution_data_for_all_cities()
 
 
 if st.button('See all cities'):
 # Plot the air quality data (pollution) for all cities to compare with eachother    
     fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_data_all_cities.plot(kind='bar', x='location', ax=ax)
+    pollution_data_cities.plot(kind='bar', x='location', ax=ax)
     plt.xlabel('City')
     plt.ylabel('Average Concentration')
     plt.title('Pollutant Comparison for All Cities')
