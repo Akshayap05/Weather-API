@@ -143,14 +143,14 @@ st.pyplot(fig)
 
 def pollutant_data(selected_city):
     engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = """
+    query = f"""
             SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
             FROM student.weather
-            GROUP BY '{selected_city}'
+            WHERE location = '{selected_city}'
+            GROUP BY location
             """
     pollutant_data = pd.read_sql(query, engine)
     return pollutant_data
-
 
 # Fetch the pollutant data for the selected city
 pollutant_dat = pollutant_data(selected_city)
