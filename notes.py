@@ -36,7 +36,10 @@ def get_details(cities):
 # All the cities 
     
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
+
+st.sidebar.image('C:/Users/aksha/OneDrive/Pictures/logo.png')
 selected_city = st.sidebar.selectbox('Choose a city', cities)
+
 
 weather_data = temperature, latitude, longitude ,condition, icon, humidity, Cloud_cover, UV_index, CO, NO2, Ozone = get_details(selected_city)
 
