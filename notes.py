@@ -157,8 +157,19 @@ pollutant_data_city = pollutant_data(selected_city)
 
 # Display the pollutant data for the selected city
 if not pollutant_data_city.empty:
-    st.write(f"Pollutant data for {selected_city}:")
-    st.write(pollutant_data_city)
+
+    # Plot the pollutant data as a bar plot
+    fig, ax = plt.subplots(figsize=(10, 6))
+    pollutant_data_city.set_index('location').plot(kind='bar', ax=ax)
+    plt.xlabel('Pollutant')
+    plt.ylabel('Concentration')
+    plt.title(f'Pollutant Concentration in {selected_city}')
+    plt.xticks(rotation=0)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+
+    # Display the plot
+    st.pyplot(fig)
 else:
     st.write(f"No data available for {selected_city}.")
 
