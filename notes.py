@@ -37,9 +37,8 @@ def get_details(cities):
     
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 
-with st.columns(3)[1]:
-    st.sidebar.image('logo.png', width = 100, use_column_width=False, output_format='PNG')
 
+st.sidebar.image('logo.png', width = 100, use_column_width=False, align='center')
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 
 
