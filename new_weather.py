@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 
 # Page Look:
 
-st.set_page_config(page_title="Welcome to our Weather App🌦️", page_icon="🌎")
-st.title('Welcome to our Weather App')
+st.set_page_config(page_title="Welcome to our Weather App", page_icon="🌎")
+st.title('Welcome to our Weather App🌦️')
 st.write("**Select a city from the dropdown box to explore its weather.**")
 
 
