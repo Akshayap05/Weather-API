@@ -89,11 +89,7 @@ db_port = st.secrets["DB_PORT"]
 
 
 def get_data(selected_city):
-    db_user = st.secrets["DB_USER"]
-    db_password = st.secrets["DB_PASSWORD"]
-    db_host = st.secrets["DB_HOSTS"]
-    db_name = st.secrets["DB_NAME"]
-    db_port = st.secrets["DB_PORT"]
+
     try:
 
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -122,11 +118,7 @@ def get_data(selected_city):
 # Query to get air quality (pollution data):
    
 def get_pollution_data_for_all_cities():
-    db_user = st.secrets["DB_USER"]
-    db_password = st.secrets["DB_PASSWORD"]
-    db_host = st.secrets["DB_HOSTS"]
-    db_name = st.secrets["DB_NAME"]
-    db_port = st.secrets["DB_PORT"]
+
     try:
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
         query3 = f"""
