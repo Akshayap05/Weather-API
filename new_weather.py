@@ -55,7 +55,6 @@ left_col, right_col, right_hand_col = st.columns([15, 2, 8])
 if tab == "Weather":
     with left_col:
         st.markdown(f"<h2>{selected_city} Weather:</h2>", unsafe_allow_html=True)
-        st.markdown(f"<h3>Today:</h3>", unsafe_allow_html=True)
         st.write(f"Temperature: {temperature}°C")
         st.write(f"Condition: {condition}")
         st.write(f"Humidity: {humidity}%")
@@ -63,6 +62,7 @@ if tab == "Weather":
 elif tab == "Air Quality":
     with left_col:
         st.markdown(f"<h2>{selected_city} Air Quality:</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h3>Today:</h3>", unsafe_allow_html=True)
         st.write(f"UV Index: {UV_index}")
         st.write(f"CO: {CO}")
         st.write(f"NO2: {NO2}")
