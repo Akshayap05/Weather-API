@@ -109,8 +109,8 @@ def get_data(selected_city):
         st.error(f'Error: {e}')
 
 
-data = get_data(selected_city)
-air_quality = get_data(selected_city)
+#data = get_data(selected_city)
+#air_quality = get_data(selected_city)
 
 # Query to get air quality (pollution data):
     
@@ -125,11 +125,13 @@ def get_pollution_data_for_all_cities():
     return pollution_data_cities
 
     # Fetch the pollutant data for all cities
-pollution_data_cities = get_pollution_data_for_all_cities()
+#pollution_data_cities = get_pollution_data_for_all_cities()
 
 # Graphs:
 
 def main():
+    data, air_quality = get_data(selected_city)
+    pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
     # Calculating average temperature and plot the line chart using Matplotlib
         daily_average_temp = data.groupby('date')['temperature'].mean()
