@@ -101,10 +101,10 @@ def get_data(selected_city):
         data = pd.read_sql(query1, engine)
 
         query2 = f"""
-                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+                SELECT DISTINCT to_char(date, 'YYYY-MM-DD') AS date, location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
                 FROM student.weather
                 WHERE location = '{selected_city}'
-                GROUP BY location""" 
+                GROUP BY date ASC, location""" 
         air_quality = pd.read_sql(query2, engine)
 
         return data,air_quality
@@ -157,8 +157,8 @@ def main():
     # Plot the air quality data (pollution) for city selected:
     elif tab =='Air Quality':
         fig, ax = plt.subplots(figsize=(8, 6))
-        air_quality.set_index('location').plot(kind='bar', ax=ax)
-        plt.xlabel('Pollutant')
+        air_quality.set_index('date').plot(kind='bar', ax=ax)
+        plt.xlabel('Date')
         plt.ylabel('Average Concentration')
         plt.title(f'Pollutant Concentration in {selected_city}')
         plt.xticks(rotation=0)
