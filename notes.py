@@ -157,7 +157,7 @@ pollutant_dat = pollutant_data(selected_city)
 
 # Display the pollutant data for the selected city
 if not pollutant_dat.empty:
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 4))
     pollutant_dat.set_index('location').plot(kind='bar', ax=ax)
     plt.xlabel('Pollutant')
     plt.ylabel('Average Concentration')
