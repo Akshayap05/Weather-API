@@ -142,46 +142,6 @@ st.pyplot(fig)
 
 
 
-import streamlit as st
-
-# Create a multiselect widget to select cities
-# Function to fetch pollutant data for selected cities
-def get_pollutant_data_for_cities(cities):
-    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-    query = f"""
-            SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
-            FROM student.weather
-            WHERE location IN {tuple(cities)}
-            GROUP BY location
-            """
-    pollutant_data_cities = pd.read_sql(query, engine)
-    return pollutant_data_cities
-
-# Define cities list (you should define this list earlier in your code)
-#cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester', 'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
-
-# Multiselect widget to select cities
-#selected_city = 'London'  # You need to define the default value for selected_city
-city_comparisons = st.multiselect('Select cities to compare with London', cities, default=[selected_city])
-
-# Fetch the pollutant data for selected cities
-pollutant_data_cities = get_pollutant_data_for_cities(city_comparisons)
-
-# Plot the pollutants for selected cities
-if not pollutant_data_cities.empty:
-    fig, ax = plt.subplots(figsize=(10, 6))
-    pollutant_data_cities.plot(kind='bar', x='location', ax=ax)
-    plt.xlabel('City')
-    plt.ylabel('Average Concentration')
-    plt.title('Pollutant Comparison for Selected Cities')
-    plt.xticks(rotation=45)
-    plt.legend(loc='upper right')
-    plt.tight_layout()
-
-    # Display the plot
-    st.pyplot(fig)
-else:
-    st.write("No data available for the selected cities.")
 
 
 
