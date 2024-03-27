@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Welcome to our Weather App", page_icon="🌎")
 st.title('🌦️Welcome to our Weather App')
-st.write("**Select a city from the dropdown box to explore its weather.**")
+#st.write("**Select a city from the dropdown box to explore its weather.**")
+st.markdown("<h3 style='text-align: center;'>Select a city from the dropdown box to explore its weather</h3>", unsafe_allow_html=True)
 
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
