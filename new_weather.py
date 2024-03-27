@@ -72,10 +72,10 @@ if tab == 'Weather':
     b1, b2 = st.columns(2)
     with b1:
         st.markdown("<div style='padding: 5% 2% 2% 5%; background-color: #657796;'><h6 style='text-align: center;'>Current Time:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{time}</h4></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 14px; background-color: #657796;'><h3 style='text-align: center;'>{time}</h4></div>", unsafe_allow_html=True)
     with b2:
         st.markdown("<div style='padding: 5% 2% 2% 5%; background-color: #657796;'><h6 style='text-align: center;'>Today feels like:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 14px; background-color: #657796;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
 
 
 
