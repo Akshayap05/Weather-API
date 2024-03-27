@@ -61,16 +61,16 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 if tab == 'Weather':
     a1, a2, a3 = st.columns(3)
     with a1:
-        st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h6 style='text-align: center;'>Temperature</h6>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 10; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 1%; background-color: #0074cc;'><h6 style='text-align: center;'>Temperature</h6>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 1; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
 
     with a2:
-        st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h6 style='text-align: center;'>Humidity</h6>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 10; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 1%; background-color: #0074cc;'><h6 style='text-align: center;'>Humidity</h6>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 1; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
 
     with a3:
-        st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h6 style='text-align: center;'>Condition</h6>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 5%; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h4>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 1%; background-color: #0074cc;'><h6 style='text-align: center;'>Condition</h6>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 1%; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h4>", unsafe_allow_html=True)
     #    icon_url = "https:" + icon
     #    st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
     #    st.image(icon_url, use_column_width='False', output_format='auto')
