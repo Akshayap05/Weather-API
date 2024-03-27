@@ -24,9 +24,10 @@ st.markdown(
         background-color: #293745;
         }
 
-    <style>
+    </style>
 
-    """
+    """,
+    unsafe_allow_html=True
 
 
 )
