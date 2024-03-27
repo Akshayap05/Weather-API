@@ -57,19 +57,19 @@ a1, a2, a3, a4 = st.columns(4)
 a1, a2, a3, a4 = st.columns(4)
 
 # Display metrics and image with center alignment
-with a1.metric:
+with a1:
     st.markdown("<h2 style='text-align: center;'>Temperature</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='text-align: center;'>{temperature}°C</p>", unsafe_allow_html=True)
 
-with a2.metric:
+with a2:
     st.markdown("<h2 style='text-align: center;'>Humidity</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='text-align: center;'>{humidity}%</p>", unsafe_allow_html=True)
 
-with a3.metric:
+with a3:
     st.markdown("<h2 style='text-align: center;'>Condition</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='text-align: center;'>{condition}</p>", unsafe_allow_html=True)
 
-with a4.metric:
+with a4:
     icon_url = "https:" + icon
     st.markdown("<h2 style='text-align: center;'>Icon</h2>", unsafe_allow_html=True)
     st.image(icon_url, use_column_width='always', output_format='auto')
