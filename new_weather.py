@@ -71,7 +71,7 @@ with a3:
 
 with a4:
     icon_url = "https:" + icon
-    st.markdown("<h2 style='text-align: center;'>Icon</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
     st.image(icon_url, use_column_width='False', output_format='auto')
 
 
