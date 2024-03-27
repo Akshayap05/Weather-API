@@ -144,11 +144,17 @@ def get_pollution_data_for_all_cities():
     except Exception as e:
         st.error(f'Error: {e}')
 
-
+def reload_data(cities):
+    rerun_data = get_details(cities)
+    st.experimental_rerun(rerun_data)
 
 # Graphs:
 
 def main():
+    if refresh_data:
+        reload_data(selected_city)
+    else:
+        st.error(f'Unable to reload')
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
@@ -198,14 +204,7 @@ def main():
 
 refresh_data = st.sidebar.button('Refresh')
 
-def reload_data(cities):
-    rerun_data = get_details(cities)
-    st.experimental_rerun(rerun_data)
 
-if refresh_data:
-    reload_data(selected_city)
-else:
-    st.error(f'Unable to reload')
 
 main()
 
