@@ -11,12 +11,7 @@ from datetime import datetime
 
 st.set_page_config(page_title="Explore the UK's Weather", page_icon="🌎")
 st.title(f'🌦️UK Weather Explorer')
-#st.write("**Select a city from the dropdown box to explore its weather.**")
 st.markdown("<h6 style='text-align: left;'>First select a city to explore its weather</h6>", unsafe_allow_html=True)
-
-#with open('style.css') as f:
-#    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
 
 # Get weather data from API for different cities:
 
@@ -50,7 +45,8 @@ def get_details(cities):
 
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.sidebar.selectbox('Choose a city', cities)
-tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
+tab = st.sidebar.radio('Select Tab', ['Weather', 'Air Quality'])
+#tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 
 # Display metrics with center alignment, colour, padding, margin adjusted:
