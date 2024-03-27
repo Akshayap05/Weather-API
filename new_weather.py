@@ -34,7 +34,7 @@ st.markdown(
 
 # Get weather data from API for different cities:
 
-
+@st.cache
 def get_details(cities):
     
     try:
@@ -124,7 +124,7 @@ db_port = st.secrets["DB_PORT"]
 
 # Connect to database, get weather details through table using query:
 
-
+@st.cache
 def get_data(selected_city):
 
     try:
@@ -152,7 +152,8 @@ def get_data(selected_city):
 
 
 # Query to get air quality (pollution data):
-   
+
+@st.cache   
 def get_pollution_data_for_all_cities():
 
     try:
