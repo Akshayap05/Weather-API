@@ -196,6 +196,17 @@ def main():
 
 #data, air_quality, air_quality_all_cities = get_data(selected_city)
 
+refresh_data = st.sidebar.button('Refresh')
+
+def reload_data():
+    rerun_data = get_details()
+    st.experimental_rerun(rerun_data)
+
+if refresh_data:
+    reload_data()
+else:
+    st.error(f'Unable to reload')
+
 main()
 
 
