@@ -86,13 +86,13 @@ if tab == 'Air Quality':
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h3 style='text-align: center;'>{UV_index}</h3>", unsafe_allow_html=True)
     with b2:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;' >CO</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3>", unsafe_allow_html=True)
     with b3:
-        st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h5 style='text-align: center;'>NO2</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{NO2}</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>NO2</h5>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h3 style='text-align: center;'>{NO2}</h3>", unsafe_allow_html=True)
     with b4:
-        st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h5 style='text-align: center;'>Ozone (O3)</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{Ozone}</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>Ozone (O3)</h5>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h3 style='text-align: center;'>{Ozone}</h3>", unsafe_allow_html=True)
 
 
 
