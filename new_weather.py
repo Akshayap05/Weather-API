@@ -21,7 +21,7 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 # Get weather data from API for different cities:
 
 def current_time():
-    return datetime()
+    return datetime.now()
 
 current_time_now = current_time()
 
