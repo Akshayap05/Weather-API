@@ -62,11 +62,11 @@ if tab == 'Weather':
     a1, a2, a3 = st.columns(3)
     with a1:
         st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h5 style='text-align: center;'>Temperature</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 10; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
 
     with a2:
         st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h5 style='text-align: center;'>Humidity</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 10; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
 
     with a3:
         st.markdown("<div style='padding: 10% 3% 3% 10%; background-color: #0074cc;'><h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
