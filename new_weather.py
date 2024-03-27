@@ -62,15 +62,15 @@ if tab == 'Weather':
     a1, a2, a3 = st.columns(3)
     with a1:
         st.markdown("<div style='padding: 10% 3% 3% 3%;  background-color: #0074cc;'><h6 style='text-align: center;'>Temperature</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
 
     with a2:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h6 style='text-align: center;'>Humidity</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
 
     with a3:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h6 style='text-align: center;'>Condition</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
     #    icon_url = "https:" + icon
     #    st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
     #    st.image(icon_url, use_column_width='False', output_format='auto')
@@ -83,16 +83,16 @@ if tab == 'Air Quality':
     b1, b2, b3, b4 = st.columns(4)
     with b1:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>UV Index</h5></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{UV_index}</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{UV_index}</h3></div>", unsafe_allow_html=True)
     with b2:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;' >CO</h5></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3></div>", unsafe_allow_html=True)
     with b3:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>NO2</h5></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{NO2}</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{NO2}</h3></div>", unsafe_allow_html=True)
     with b4:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>Ozone (O3)</h5></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{Ozone}</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{Ozone}</h3></div>", unsafe_allow_html=True)
 
 
 # Credentials to connect to database in pagila postgresql:
