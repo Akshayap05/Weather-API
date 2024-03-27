@@ -53,8 +53,8 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 # Add and position text to homepage using left column:
 
 a1, a2, a3, a4 = st.columns(4)
-st.markdown(f"<h3>{selected_city}, unsafe_allow_html=True)
-a1.metric(f'{temperature}°C')
+
+a1.metric(f'{selected_city} temperature', f'{temperature}°C')
 a2.metric(f'Humidity', f'{humidity}%')
 a3.metric(f'Condition', f'{condition}')
 icon_url = "https:" + icon
