@@ -41,7 +41,7 @@ def get_details(cities):
         CO = weather['current']['air_quality']['co']
         NO2= weather['current']['air_quality']['no2']
         Ozone= weather['current']['air_quality']['o3']
-        return temperature, condition, humidity, local_time, date, time, feels_like, CO, NO2, Ozone    
+        return temperature, condition, humidity,  date, time, feels_like, CO, NO2, Ozone    
     except:
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
@@ -55,7 +55,7 @@ tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 # Display metrics with center alignment, colour, padding, margin adjusted:
 
-weather_data = temperature, condition, humidity, local_time, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
+weather_data = temperature, condition, humidity, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
 
 if tab == 'Weather':
     #temperature, humidity,condition = get_details(selected_city)
