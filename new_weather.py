@@ -5,6 +5,7 @@ import numpy as np
 import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 # Page title, icon, and headings:
 
@@ -19,6 +20,10 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 
 # Get weather data from API for different cities:
 
+def current_time():
+    return datetime()
+
+current_time_now = current_time()
 
 def get_details(cities):
     
@@ -29,8 +34,9 @@ def get_details(cities):
         temperature = weather['current']['temp_c']
         condition = weather['current']['condition']['text']
         humidity = weather['current']['humidity']
-        local_time = weather['location']['localtime']
-        date, time = local_time.split(' ')
+        #local_time = weather['location']['localtime']
+        current_time_now
+        date, time = current_time_now.split(' ')
         feels_like = weather['current']['feelslike_c']
         CO = weather['current']['air_quality']['co']
         NO2= weather['current']['air_quality']['no2']
@@ -147,6 +153,7 @@ def get_pollution_data_for_all_cities():
 # Graphs:
 
 def main():
+    weather_data
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
@@ -198,6 +205,7 @@ if st.sidebar.button('Refresh'):
     st.experimental_rerun()
 
 main()
+
 
 
 
