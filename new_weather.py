@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Page Look:
 
 st.set_page_config(page_title="Weather Analysis within the UK cities", page_icon="🌎")
-st.title('🌦️Welcome to our Weather App')
+st.title('🌦️Weather Analysis within the UK cities')
 #st.write("**Select a city from the dropdown box to explore its weather.**")
 st.markdown("<h6 style='text-align: left;'>First select a city to explore its weather</h6>", unsafe_allow_html=True)
 
