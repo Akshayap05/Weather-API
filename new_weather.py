@@ -58,16 +58,16 @@ if tab == 'Weather':
     #temperature, humidity,condition = get_details(selected_city)
     a1, a2, a3 = st.columns(3)
     with a1:
-        st.markdown("<div style='padding: 6% 3% 3% 6%;  background-color: #263c52;'><h6 style='text-align: center;'>Temperature:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 6% 3% 3% 6%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 5% 3% 3% 5%;  background-color: #263c52;'><h6 style='text-align: center;'>Temperature:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 3% 3% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
 
     with a2:
-        st.markdown("<div style='padding: 6% 3% 3% 6%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 6% 3% 3% 6%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 5% 3% 3% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 3% 3% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
 
     with a3:
-        st.markdown("<div style='padding: 6% 3% 3% 6%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 6% 3% 3% 6%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 5% 3% 3% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 3% 3% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
 
     b1, b2 = st.columns(2)
     with b1:
