@@ -54,7 +54,7 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 a1, a2, a3, a4 = st.columns(4)
 
-a1.metric(f'{selected_city} temperature', f'{temperature}°C')
+a1.metric(f'temperature', f'{temperature}°C')
 a2.metric(f'Humidity', f'{humidity}%')
 a3.metric(f'Condition', f'{condition}')
 icon_url = "https:" + icon
