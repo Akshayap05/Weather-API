@@ -79,13 +79,13 @@ if tab == 'Air Quality':
     #CO, NO2, Ozone = get_details(selected_city)
     b1, b2, b3, b4 = st.columns(4)
     with b1:
-        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;' >CO</h5></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h6 style='text-align: center;' >CO</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3></div>", unsafe_allow_html=True)
     with b2:
-        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>NO2</h5></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h6 style='text-align: center;'>NO2</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{NO2}</h3></div>", unsafe_allow_html=True)
     with b3:
-        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>Ozone (O3)</h5></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h6 style='text-align: center;'>Ozone (O3)</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #0074cc;'><h3 style='text-align: center;'>{Ozone}</h3></div>", unsafe_allow_html=True)
 
 
