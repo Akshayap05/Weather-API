@@ -59,6 +59,7 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 # Display metrics and image with center alignment
 if tab == 'Weather':
+    temperature, latitude, longitude ,condition = get_details(selected_city)
     a1, a2, a3 = st.columns(3)
     with a1:
         st.markdown("<div style='padding: 10% 3% 3% 3%;  background-color: #0074cc;'><h6 style='text-align: center;'>Temperature</h6></div>", unsafe_allow_html=True)
@@ -80,6 +81,7 @@ if tab == 'Weather':
     #    st.image(icon_url, use_column_width='False', output_format='auto')
 
 if tab == 'Air Quality':
+    UV_index, CO, NO2, Ozone = get_details(selected_city)
     b1, b2, b3, b4 = st.columns(4)
     with b1:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>UV Index</h5></div>", unsafe_allow_html=True)
