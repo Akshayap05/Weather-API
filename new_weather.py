@@ -69,8 +69,8 @@ if tab == 'Weather':
         st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
 
     with a3:
-        st.markdown("<div style='padding: 1% 1% 1% 1%px; background-color: #0074cc;'><h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%x; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
         icon_url = "https:" + icon
         st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
         st.image(icon_url, use_column_width='False', output_format='auto')
@@ -82,10 +82,10 @@ if tab == 'Weather':
 if tab == 'Air Quality':
     b1, b2, b3, b4 = st.columns(4)
     with b1:
-        st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h5 style='text-align: center;'>UV Index</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{UV_index}</h3>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>UV Index</h5>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h3 style='text-align: center;'>{UV_index}</h3>", unsafe_allow_html=True)
     with b2:
-        st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h5 style='text-align: center;' >CO</h5>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;' >CO</h5>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 20px; background-color: #0074cc;'><h3 style='text-align: center;'>{CO}</h3>", unsafe_allow_html=True)
     with b3:
         st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h5 style='text-align: center;'>NO2</h5>", unsafe_allow_html=True)
