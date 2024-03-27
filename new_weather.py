@@ -18,7 +18,7 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 def current_time():
     return datetime.now()
 
-current_time_now = current_time().strftime('%Y-%m-%d %H:%M')
+#current_time_now = current_time().strftime('%Y-%m-%d %H:%M')
 
 def get_details(cities):
     
@@ -30,7 +30,7 @@ def get_details(cities):
         condition = weather['current']['condition']['text']
         humidity = weather['current']['humidity']
         #local_time = weather['location']['localtime']
-        current_time_now
+        current_time_now = current_time().strftime('%Y-%m-%d %H:%M')
         date, time = current_time_now.split(' ')
         feels_like = weather['current']['feelslike_c']
         CO = weather['current']['air_quality']['co']
@@ -45,8 +45,8 @@ def get_details(cities):
 
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.sidebar.selectbox('Choose a city', cities)
-#tab = st.sidebar.radio('Select Tab', ['Weather', 'Air Quality'])
-tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
+tab = st.sidebar.radio('Select Tab', ['Weather', 'Air Quality'])
+#tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 
 # Display metrics with center alignment, colour, padding, margin adjusted:
