@@ -203,7 +203,7 @@ def reload_data(cities):
     st.experimental_rerun(rerun_data)
 
 if refresh_data:
-    reload_data()
+    reload_data(selected_city)
 else:
     st.error(f'Unable to reload')
 
