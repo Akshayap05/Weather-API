@@ -55,7 +55,7 @@ tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
 # Display metrics with center alignment, colour, padding, margin adjusted:
 
-weather_data = temperature, condition, humidity, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
+weather_data = temperature, condition, humidity, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
 
 if tab == 'Weather':
     #temperature, humidity,condition = get_details(selected_city)
