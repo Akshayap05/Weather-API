@@ -145,7 +145,8 @@ def get_pollution_data_for_all_cities():
         st.error(f'Error: {e}')
 
 def reload_data():
-    st.experimental_rerun()
+    st.rerun()
+
 
 # Graphs:
 
