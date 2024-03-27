@@ -6,7 +6,7 @@ import psycopg2
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Page Look:
+# Page title, icon, and headings:
 
 st.set_page_config(page_title="Explore the UK's Weather", page_icon="🌎")
 st.title(f'🌦️UK Weather Explorer')
@@ -18,7 +18,6 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 
 
 # Get weather data from API for different cities:
-
 
 def get_details(cities):
     
@@ -40,23 +39,17 @@ def get_details(cities):
         return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
 
-# Sidebar: Logo and Select box.
+# Sidebar: Select box.
 
-#st.sidebar.image('logo.png', width = 130, use_column_width=True)
 cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Bristol', 'Edinburgh', 'Leicester',  'York', 'Cardiff', 'Brighton', 'Coventry', 'Bath']
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
+
+# Display metrics with center alignment, colour, padding, margin adjusted:
+
 weather_data = temperature, condition, humidity, local_time, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
 
-
-# Add and position text to homepage using left column:
-
-
-
-
-
-# Display metrics and image with center alignment
 if tab == 'Weather':
     #temperature, humidity,condition = get_details(selected_city)
     a1, a2, a3 = st.columns(3)
@@ -81,9 +74,6 @@ if tab == 'Weather':
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
 
 
-    #    icon_url = "https:" + icon
-    #    st.markdown("<h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
-    #    st.image(icon_url, use_column_width='False', output_format='auto')
 
 if tab == 'Air Quality':
     #CO, NO2, Ozone = get_details(selected_city)
