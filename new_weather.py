@@ -198,8 +198,8 @@ def main():
 
 refresh_data = st.sidebar.button('Refresh')
 
-def reload_data():
-    rerun_data = get_details()
+def reload_data(cities):
+    rerun_data = get_details(cities)
     st.experimental_rerun(rerun_data)
 
 if refresh_data:
