@@ -13,12 +13,13 @@ st.set_page_config(page_title="Explore the UK's Weather", page_icon="🌎")
 st.title(f'🌦️UK Weather Forecast')
 st.markdown("<h6 style='text-align: left;'>First select a city to explore its weather</h6>", unsafe_allow_html=True)
 
-# Get weather data from API for different cities:
+# Get current time using datetime: 
 
 def current_time():
     return datetime.now()
 
-#current_time_now = current_time().strftime('%Y-%m-%d %H:%M')
+# Get weather data from API for different cities:
+# Use strftime to turn current time into a string format, remove the seconds, and split time and date:
 
 def get_details(cities):
     
@@ -57,24 +58,24 @@ if tab == 'Weather':
     #temperature, humidity,condition = get_details(selected_city)
     a1, a2, a3 = st.columns(3)
     with a1:
-        st.markdown("<div style='padding: 8% 3% 3% 3%;  background-color: #263c52;'><h6 style='text-align: center;'>Temperature:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 8% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 8% 3% 3% 2%;  background-color: #263c52;'><h6 style='text-align: center;'>Temperature:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 8% 3% 3% 2%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
 
     with a2:
-        st.markdown("<div style='padding: 8% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 8% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 8% 3% 3% 2%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 8% 3% 3% 2%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
 
     with a3:
-        st.markdown("<div style='padding: 8% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 8% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 8% 3% 3% 2%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 8% 3% 3% 2%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
 
     b1, b2 = st.columns(2)
     with b1:
-        st.markdown("<div style='padding: 8% 3% 3% 3%; background-color: #657796;'><h6 style='text-align: center;'>Current Time:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 8% 3% 3% 3%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{time}</h4></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 8% 3% 3% 2%; background-color: #657796;'><h6 style='text-align: center;'>Current Time:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 8% 3% 3% 2%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{time}</h4></div>", unsafe_allow_html=True)
     with b2:
-        st.markdown("<div style='padding: 8% 3% 3% 3%; background-color: #657796;'><h6 style='text-align: center;'>Today feels like:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 8% 3% 3% 3%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 8% 3% 3% 2%; background-color: #657796;'><h6 style='text-align: center;'>Today feels like:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 8% 3% 3% 2%; margin-bottom: 10px; background-color: #657796;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
 
 
 
