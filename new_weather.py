@@ -44,12 +44,15 @@ def get_details(cities):
         temperature = weather['current']['temp_c']
         condition = weather['current']['condition']['text']
         humidity = weather['current']['humidity']
+        local_time = weather['location']['localtime']
+        date, time = local_time.split(' ')
+        feels_like = weather['current']['feelslike_c']
         CO = weather['current']['air_quality']['co']
         NO2= weather['current']['air_quality']['no2']
         Ozone= weather['current']['air_quality']['o3']
-        return temperature, condition, humidity, CO, NO2, Ozone    
+        return temperature, condition, humidity, local_time, date, time, feels_like, CO, NO2, Ozone    
     except:
-        return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
+        return 'Error', np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN, np.NAN
 
 
 # Sidebar: Logo and Select box.
@@ -59,7 +62,7 @@ cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool',
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
-weather_data = temperature, condition, humidity, CO, NO2, Ozone = get_details(selected_city)
+weather_data = temperature, condition, humidity, local_time, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
 
 
 # Add and position text to homepage using left column:
@@ -83,24 +86,30 @@ if tab == 'Weather':
     with a3:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>Condition</h6></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
-    #    icon_url = "https:" + icon
-    #    st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
-    #    st.image(icon_url, use_column_width='False', output_format='auto')
-    #with a4:
+
+    b1, b2 = st.columns(2)
+    with b1:
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>time</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{time}</h4></div>", unsafe_allow_html=True)
+    with b2:
+        st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>Feels like:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{feels_like}°C</h3></div>", unsafe_allow_html=True)
+
+
     #    icon_url = "https:" + icon
     #    st.markdown("<h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
     #    st.image(icon_url, use_column_width='False', output_format='auto')
 
 if tab == 'Air Quality':
     #CO, NO2, Ozone = get_details(selected_city)
-    b1, b2, b3 = st.columns(3)
-    with b1:
+    c1, c2, c3 = st.columns(3)
+    with c1:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;' >CO</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{CO}</h3></div>", unsafe_allow_html=True)
-    with b2:
+    with c2:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>NO2</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{NO2}</h3></div>", unsafe_allow_html=True)
-    with b3:
+    with c3:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #263c52;'><h6 style='text-align: center;'>Ozone (O3)</h5></div>", unsafe_allow_html=True)
         st.markdown(f"<div style='padding: 10% 3% 3% 3%; margin-bottom: 10px; background-color: #263c52;'><h3 style='text-align: center;'>{Ozone}</h3></div>", unsafe_allow_html=True)
 
