@@ -70,7 +70,7 @@ if tab == 'Weather':
 
     with a3:
         st.markdown("<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 10% 3% 3% 3%; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 10% 3% 3% 5%; background-color: #0074cc;'><h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
     #    icon_url = "https:" + icon
     #    st.markdown("<div style='padding: 20px; background-color: #0074cc;'><h2 style='text-align: center;'/h2>", unsafe_allow_html=True)
     #    st.image(icon_url, use_column_width='False', output_format='auto')
