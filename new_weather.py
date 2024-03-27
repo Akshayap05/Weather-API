@@ -99,7 +99,7 @@ db_port = st.secrets["DB_PORT"]
 
 # Connect to database, get weather details through table using query:
 
-@st.cache(allow_output_mutation=True)
+@st.cache#(allow_output_mutation=True)
 def get_data(selected_city):
 
     try:
