@@ -10,7 +10,7 @@ from datetime import datetime
 # Page title, icon, and headings:
 
 st.set_page_config(page_title="Explore the UK's Weather", page_icon="🌎")
-st.title(f'🌦️UK Weather Explorer')
+st.title(f'🌦️UK Weather Forecast')
 st.markdown("<h6 style='text-align: left;'>First select a city to explore its weather</h6>", unsafe_allow_html=True)
 
 # Get weather data from API for different cities:
