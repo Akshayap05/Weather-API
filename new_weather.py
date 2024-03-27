@@ -153,7 +153,6 @@ def get_pollution_data_for_all_cities():
 # Graphs:
 
 def main():
-    weather_data
     data, air_quality = get_data(selected_city)
     pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
