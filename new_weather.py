@@ -97,7 +97,7 @@ db_host = st.secrets["DB_HOSTS"]
 db_name = st.secrets["DB_NAME"]
 db_port = st.secrets["DB_PORT"]
 
-# Connect to database, get weather details through table using query:
+# Get weather details through table using query:
 
 @st.cache
 def get_data(selected_city):
@@ -134,7 +134,7 @@ def get_pollution_data_for_all_cities():
     try:
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
         query3 = f"""
-                SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
+                SELECT location, co AS co, no2 AS no2, o3 AS o3
                 FROM student.weather
                 GROUP BY location
                 """
@@ -143,7 +143,7 @@ def get_pollution_data_for_all_cities():
     except Exception as e:
         st.error(f'Error: {e}')
 
-
+#SELECT location, AVG(co) AS avg_co, AVG(no2) AS avg_no2, AVG(o3) AS avg_o3
 
 # Graphs:
 
