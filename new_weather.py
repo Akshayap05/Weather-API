@@ -151,6 +151,7 @@ def reload_data(cities):
 # Graphs:
 
 def main():
+    refresh_data = st.sidebar.button('Refresh')
     if refresh_data:
         reload_data(selected_city)
     else:
@@ -202,7 +203,7 @@ def main():
 
 #data, air_quality, air_quality_all_cities = get_data(selected_city)
 
-refresh_data = st.sidebar.button('Refresh')
+
 
 
 
