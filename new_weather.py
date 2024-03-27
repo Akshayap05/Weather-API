@@ -62,12 +62,12 @@ if tab == 'Weather':
         st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{temperature}°C</h3></div>", unsafe_allow_html=True)
 
     with a2:
-        st.markdown("<div style='padding: 5% 3% 3% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 5% 3% 3% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 5% 2% 2% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Humidity:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{humidity}%</h3></div>", unsafe_allow_html=True)
 
     with a3:
-        st.markdown("<div style='padding: 5% 3% 3% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='padding: 5% 3% 3% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
+        st.markdown("<div style='padding: 5% 2% 2% 5%; background-color: #263c52;'><h6 style='text-align: center;'>Condition:</h6></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 5% 2% 2% 5%; margin-bottom: 14px; background-color: #263c52;'><h3 style='text-align: center;'>{condition}</h4></div>", unsafe_allow_html=True)
 
     b1, b2 = st.columns(2)
     with b1:
