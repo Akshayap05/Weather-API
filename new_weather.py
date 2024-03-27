@@ -59,6 +59,12 @@ a2.metric(f'Humidity', f'{humidity}%')
 a3.metric(f'Condition', f'{condition}')
 icon_url = "https:" + icon
 a4.image(icon_url)
-left_col, right_col, right_hand_col = st.columns([15, 2, 7])
+#left_col, right_col, right_hand_col = st.columns([15, 2, 7])
+
+b1, b2, b3 =st.columns(3)
+
+b1.metric(f'CO', f'{CO}')
+b2.metric(f'NO2', f'{NO2}')
+b3.metric(f'Ozone (O3)', f'{Ozone}')
 
 
