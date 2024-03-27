@@ -54,17 +54,26 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 a1, a2, a3, a4 = st.columns(4)
 
-a1.metric(f'temperature', f'{temperature}°C')
-a2.metric(f'Humidity', f'{humidity}%')
-a3.metric(f'Condition', f'{condition}')
-icon_url = "https:" + icon
-a4.image(icon_url)
-#left_col, right_col, right_hand_col = st.columns([15, 2, 7])
+a1, a2, a3, a4 = st.columns(4)
 
-b1, b2, b3 =st.columns(3)
+# Display metrics and image with center alignment
+with a1.metric:
+    st.markdown("<h2 style='text-align: center;'>Temperature</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center;'>{temperature}°C</p>", unsafe_allow_html=True)
 
-b1.metric(f'CO', f'{CO}')
-b2.metric(f'NO2', f'{NO2}')
-b3.metric(f'Ozone (O3)', f'{Ozone}')
+with a2.metric:
+    st.markdown("<h2 style='text-align: center;'>Humidity</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center;'>{humidity}%</p>", unsafe_allow_html=True)
+
+with a3.metric:
+    st.markdown("<h2 style='text-align: center;'>Condition</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center;'>{condition}</p>", unsafe_allow_html=True)
+
+with a4.metric:
+    icon_url = "https:" + icon
+    st.markdown("<h2 style='text-align: center;'>Icon</h2>", unsafe_allow_html=True)
+    st.image(icon_url, use_column_width='always', output_format='auto')
+
+
 
 
