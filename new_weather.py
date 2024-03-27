@@ -23,7 +23,7 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 def current_time():
     return datetime.now()
 
-current_time_now = current_time().strftime('%Y-%m-%d %H:%M:%S')
+current_time_now = current_time().strftime('%Y-%m-%d %H:%M')
 
 def get_details(cities):
     
