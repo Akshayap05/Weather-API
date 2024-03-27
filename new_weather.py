@@ -43,7 +43,7 @@ cities = ['London', 'Manchester', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool',
 selected_city = st.sidebar.selectbox('Choose a city', cities)
 tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
-#weather_data = temperature, condition, humidity, CO, NO2, Ozone = get_details(selected_city)
+weather_data = temperature, condition, humidity, CO, NO2, Ozone = get_details(selected_city)
 
 
 # Add and position text to homepage using left column:
