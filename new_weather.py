@@ -19,7 +19,7 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 
 # Get weather data from API for different cities:
 
-#@st.cache
+
 def get_details(cities):
     
     try:
@@ -145,7 +145,7 @@ def get_pollution_data_for_all_cities():
         st.error(f'Error: {e}')
 
 def reload_data():
-    st.rerun()
+    st.experimental_rerun()
 
 
 # Graphs:
