@@ -19,7 +19,7 @@ with open('style.css') as f:
 
 # Get weather data from API for different cities:
 
-@st.cache
+
 def get_details(cities):
     
     try:
