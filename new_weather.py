@@ -52,11 +52,11 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 # Add and position text to homepage using left column:
 
-a1, a2, a3, a4, a5 = st.columns(4)
+a1, a2, a3, a4 = st.columns(4)
 
-a1.metric(f'temperature', f'{temperature}°C')
-a2.metric(f'Humidity', f'{humidity}%')
-a3.metric(f'Condition', f'{condition}')
+a1.metric(f'temperature', f'##{temperature}°C')
+a2.metric(f'Humidity', f'##{humidity}%')
+a3.metric(f'Condition', f'##{condition}')
 icon_url = "https:" + icon
 a4.image(icon_url)
 #left_col, right_col, right_hand_col = st.columns([15, 2, 7])
