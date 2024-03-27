@@ -80,16 +80,16 @@ elif tab == 'Air Quality':
     b1, b2, b3, b4 = st.columns(4)
     with b1:
         st.markdown("<h5 >UV Index</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 '>{UV_index}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 >{UV_index}</h2>", unsafe_allow_html=True)
     with b2:
         st.markdown("<h5 >CO</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 >{CO}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 >{CO}</h2>", unsafe_allow_html=True)
     with b3:
         st.markdown("<h5 >NO2</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 >{NO2}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 >{NO2}</h2>", unsafe_allow_html=True)
     with b4:
-        st.markdown("<h5</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 >{Ozone}</h3>", unsafe_allow_html=True)
+        st.markdown("<h5 >Ozone (O3)</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h2>{Ozone}</h2>", unsafe_allow_html=True)
 else:
     st.error('Unable to retrieve weather data')
 
