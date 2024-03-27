@@ -16,21 +16,6 @@ st.markdown("<h6 style='text-align: left;'>Select a city from the dropdown box t
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <style>
-        body {
-        
-        background-color: #293745;
-        }
-
-    </style>
-
-    """,
-    unsafe_allow_html=True
-
-
-)
 
 # Get weather data from API for different cities:
 
