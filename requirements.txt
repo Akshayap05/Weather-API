@@ -8,3 +8,4 @@ numpy
 sqlalchemy
 seaborn
 plotly.express
+datetime
