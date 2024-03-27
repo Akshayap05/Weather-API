@@ -19,6 +19,7 @@ st.markdown("<h6 style='text-align: left;'>First select a city to explore its we
 
 # Get weather data from API for different cities:
 
+@st.cache
 def get_details(cities):
     
     try:
