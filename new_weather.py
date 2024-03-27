@@ -58,16 +58,16 @@ a1, a2, a3, a4 = st.columns(4)
 
 # Display metrics and image with center alignment
 with a1:
-    st.markdown("<h2 style='text-align: center;'>Temperature</h2>", unsafe_allow_html=True)
-    st.markdown(f"<p style='text-align: center;'>{temperature}°C</p>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center;'>Temperature</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>{temperature}°C</h2>", unsafe_allow_html=True)
 
 with a2:
-    st.markdown("<h2 style='text-align: center;'>Humidity</h2>", unsafe_allow_html=True)
-    st.markdown(f"<p style='text-align: center;'>{humidity}%</p>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center;'>Humidity</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>{humidity}%</h2>", unsafe_allow_html=True)
 
 with a3:
-    st.markdown("<h2 style='text-align: center;'>Condition</h2>", unsafe_allow_html=True)
-    st.markdown(f"<p style='text-align: center;'>{condition}</p>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>{condition}</h2>", unsafe_allow_html=True)
 
 with a4:
     icon_url = "https:" + icon
