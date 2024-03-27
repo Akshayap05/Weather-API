@@ -54,9 +54,9 @@ weather_data = temperature, latitude, longitude ,condition, icon, humidity, Clou
 
 a1, a2, a3, a4 = st.columns(4)
 
-a1.metric(f'temperature', f'##{temperature}°C')
-a2.metric(f'Humidity', f'##{humidity}%')
-a3.metric(f'Condition', f'##{condition}')
+a1.metric(f'temperature', f'<h3>{temperature}°C</h3>', unsafe_allow_html=True)
+a2.metric(f'Humidity', f'<h3>{humidity}</h3>', unsafe_allow_html=True)
+a3.metric(f'Condition', f'<h3>{condition}</h3>', unsafe_allow_html=True)
 icon_url = "https:" + icon
 a4.image(icon_url)
 #left_col, right_col, right_hand_col = st.columns([15, 2, 7])
