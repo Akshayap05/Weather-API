@@ -13,8 +13,8 @@ st.title('🌦️Welcome to our Weather App')
 #st.write("**Select a city from the dropdown box to explore its weather.**")
 st.markdown("<h6 style='text-align: left;'>Select a city from the dropdown box to explore its weather</h6>", unsafe_allow_html=True)
 
-#with open('style.css') as f:
-#    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Get weather data from API for different cities:
 
