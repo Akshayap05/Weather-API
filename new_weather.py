@@ -62,15 +62,15 @@ if tab == 'Weather':
     a1, a2, a3, a4 = st.columns(4)
     with a1:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>Temperature</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{temperature}°C</h3>", unsafe_allow_html=True)
 
     with a2:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>Humidity</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{humidity}%</h3>", unsafe_allow_html=True)
 
     with a3:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>Condition</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{condition}</h3>", unsafe_allow_html=True)
 
     with a4:
         icon_url = "https:" + icon
@@ -81,16 +81,16 @@ if tab == 'Air Quality':
     b1, b2, b3, b4 = st.columns(4)
     with b1:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>UV Index</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{UV_index}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{UV_index}</h3>", unsafe_allow_html=True)
     with b2:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;' >CO</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{CO}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{CO}</h3>", unsafe_allow_html=True)
     with b3:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>NO2</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{NO2}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{NO2}</h3>", unsafe_allow_html=True)
     with b4:
         st.markdown("<div style='padding: 20px; background-color: #f0f0f0;'><h5 style='text-align: center;'>Ozone (O3)</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='text-align: center;'>{Ozone}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 20px; background-color: #f0f0f0;'><h3 style='text-align: center;'>{Ozone}</h3>", unsafe_allow_html=True)
 
 
 
