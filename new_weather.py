@@ -49,6 +49,7 @@ selected_city = st.sidebar.selectbox('Choose a city', cities)
 tab = st.sidebar.radio('Select Tab', ['Weather', 'Air Quality'])
 #tab = st.sidebar.radio("Select Tab", ["Weather", "Air Quality"], index=0)
 
+st.write(f'{selected_city} Today:')
 
 # Display metrics with center alignment, colour, padding, margin adjusted:
 
