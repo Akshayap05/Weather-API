@@ -198,8 +198,8 @@ def main():
 
 #data, air_quality, air_quality_all_cities = get_data(selected_city)
 
-if st.sidebar.button('Refresh'):
-    st.experimental_rerun()
+#if st.sidebar.button('Refresh'):
+#    st.experimental_rerun()
 
 main()
 
