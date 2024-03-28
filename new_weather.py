@@ -156,7 +156,6 @@ def main():
     if tab =='Weather':
     # Calculating average temperature and plot the line chart using Matplotlib
         daily_average_temp = data.groupby('date')['temperature'].mean()
-
         plt.figure(figsize=(10, 6))
         plt.plot(daily_average_temp.index, daily_average_temp.values, marker='o', linestyle='-')
         plt.xlabel('Date')
