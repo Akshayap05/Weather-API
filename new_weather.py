@@ -155,7 +155,7 @@ def main():
     pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
     # Calculating average temperature and plot the line chart using Matplotlib
-        st.header(f'Changes in Temperature over time')
+        st.subheader(f'Changes in Temperature over time')
         daily_average_temp = data.groupby('date')['temperature'].mean()
 
         plt.figure(figsize=(10, 6))
