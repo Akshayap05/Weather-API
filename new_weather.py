@@ -171,7 +171,6 @@ def main():
 
     # Plot the air quality data (pollution) for city selected:
     elif tab =='Air Quality':
-        st.subheader(f'Changes in pollution levels over time:')
         fig, ax = plt.subplots(figsize=(8, 6))
         air_quality.set_index('date').plot(kind='bar', ax=ax)
         plt.xlabel('Date')
