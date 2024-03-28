@@ -56,7 +56,7 @@ st.subheader(f'{selected_city} Today:')
 weather_data = temperature, condition, humidity, date, time, feels_like, CO, NO2, Ozone = get_details(selected_city)
 
 if tab == 'Weather':
-    #temperature, humidity,condition = get_details(selected_city)
+    #temperature, humidity, and condition
     a1, a2, a3 = st.columns(3)
     with a1:
         st.markdown("<div style='padding: 5% 2% 2% 5%;  background-color: #263c52;'><h6 style='text-align: center;'>Temperature:</h6></div>", unsafe_allow_html=True)
@@ -81,7 +81,7 @@ if tab == 'Weather':
 
 
 if tab == 'Air Quality':
-    #CO, NO2, Ozone = get_details(selected_city)
+    #CO, NO2, and Ozone 
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown("<div style='padding: 5% 2% 2% 5%; background-color: #263c52;'><h6 style='text-align: center;' >Carbon Monoxide (CO):</h5></div>", unsafe_allow_html=True)
