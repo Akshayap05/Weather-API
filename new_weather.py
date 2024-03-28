@@ -155,7 +155,7 @@ def main():
     pollution_data_cities = get_pollution_data_for_all_cities()
     if tab =='Weather':
     # Calculating average temperature and plot the line chart using Matplotlib
-        st.subheader(f'Changes in Temperature over time')
+        st.subheader(f'Changes in Temperature over time:')
         daily_average_temp = data.groupby('date')['temperature'].mean()
 
         plt.figure(figsize=(10, 6))
@@ -171,6 +171,7 @@ def main():
 
     # Plot the air quality data (pollution) for city selected:
     elif tab =='Air Quality':
+        st.subheader(f'Changes in pollution levels over time:')
         fig, ax = plt.subplots(figsize=(8, 6))
         air_quality.set_index('date').plot(kind='bar', ax=ax)
         plt.xlabel('Date')
